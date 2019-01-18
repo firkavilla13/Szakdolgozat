@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">RecAppt</string>
+    <string name="string_username">Username</string>
+    <string name="string_password">Password</string>
+    <string name="string_confirm_password">Confirm Password</string>
+    <string name="string_login">Log In</string>
+    <string name="string_not_registered">Havent registered yet?</string>
+    <string name="string_register">REGISTRATION</string>
+    <string name="string_already_registered">Do you have an account?</string>
+    <string name="string_full_name">Full name</string>
+    <string name="string_email">Email address</string>
+    <string name="string_log_out">Log out</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_close">Close navigation drawer</string>
+</resources>
