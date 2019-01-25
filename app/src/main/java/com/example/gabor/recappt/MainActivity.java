@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
                 {
                     SharedPreferences sharedPreferences=getSharedPreferences("MyData", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor=sharedPreferences.edit();
-                    editor.putString("username",user);
+                    editor.putString("sharedUsername",user);
                     editor.commit();
                     Toast.makeText(MainActivity.this,"Logged in!",Toast.LENGTH_SHORT).show();
                     Intent MainMenu = new Intent(MainActivity.this,MainMenuActivity.class);

@@ -8,7 +8,8 @@
     android:orientation="vertical"
     android:background="@drawable/felhocske"
     android:weightSum="10"
-    tools:context=".MainMenuActivity">
+    tools:context=".MainMenuActivity"
+    tools:openDrawer="start">
 
     <RelativeLayout
         android:layout_width="match_parent"

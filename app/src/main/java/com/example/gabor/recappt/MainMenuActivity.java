@@ -1,6 +1,10 @@
 package com.example.gabor.recappt;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,6 +16,7 @@ import android.support.v7.widget.CardView;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.GridLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
@@ -23,25 +28,48 @@ public class MainMenuActivity extends AppCompatActivity implements NavigationVie
 
     private DrawerLayout drawer;
     GridLayout mainGrid;
+    TextView navUsername,navEmail;
+    DatabaseHelper db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
 
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
         mainGrid = (GridLayout)findViewById(R.id.mainGrid);
         setSingleEvent(mainGrid);
+
         android.support.v7.widget.Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         drawer = findViewById(R.id.drawer_layout);
-        NavigationView navigationView   = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle( this, drawer, toolbar,
                 R.string.navigation_drawer_open, R.string.navigation_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+        navigationView.removeHeaderView(navigationView.getHeaderView(0));
 
 
 
+        SharedPreferences sharedPreferences=getSharedPreferences("MyData", Context.MODE_PRIVATE);
+        String segedUser = sharedPreferences.getString("sharedUsername","Empty");
+        View header = navigationView.inflateHeaderView(R.layout.nav_header);
+        navUsername = (TextView)header.findViewById(R.id.textView_nav_fullname);
+        navEmail = (TextView)header.findViewById(R.id.textView_nav_email);
+        db = new DatabaseHelper(this);
+        Cursor eredmeny2 = db.getMinden(segedUser);
+        navUsername.setText("Welcome");
+        navEmail.setText(segedUser.toString());
+        StringBuilder stringBufferEmail = new StringBuilder();
+
+        if (eredmeny2 != null && eredmeny2.getColumnCount()>0){
+
+            while(eredmeny2.moveToNext())
+            {
+
+            }
+        }
 
     }
     public void onBackPressed(){

@@ -32,6 +32,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         onCreate(sqLiteDatabase);
     }
+    public String getFullname(){
+        return COL_4;
+    }
 
     public long addUser(String user, String password, String fullname, String email){
         SQLiteDatabase db = this.getWritableDatabase();
@@ -66,13 +69,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public Cursor getEmail(String username){
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("Select " +COL_5+ " from "+TABLE_NAME+" where "+COL_2+"="+new String[]{username},null);
+        Cursor res = db.rawQuery("Select " +COL_5+ " from "+TABLE_NAME+" where "+COL_2+"="+"'username'",null);
         return res;
     }
     public Cursor getFullName(String username){
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("Select " +COL_4+ " from "+TABLE_NAME+" where "+COL_2+"="+new String[]{username},null);
+        Cursor res = db.rawQuery("Select " +COL_4+ " from "+TABLE_NAME+" where "+COL_2+"="+"'username'",null);
         return res;
     }
+    public Cursor getMinden(String username){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("Select * from "+TABLE_NAME+" where "+COL_2+"="+"'username'",null);
+        return res;
+    }
+
 
 }

@@ -10,6 +10,8 @@
     <string name="string_full_name">Full name</string>
     <string name="string_email">Email address</string>
     <string name="string_log_out">Log out</string>
+    <string name="string_nav_fullname">Full name</string>
+    <string name="string_nav_email">Email</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_close">Close navigation drawer</string>
 </resources>
