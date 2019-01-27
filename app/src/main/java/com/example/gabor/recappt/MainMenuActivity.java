@@ -41,7 +41,7 @@ public class MainMenuActivity extends AppCompatActivity implements NavigationVie
         mainGrid = (GridLayout)findViewById(R.id.mainGrid);
         setSingleEvent(mainGrid);
 
-        android.support.v7.widget.Toolbar toolbar = findViewById(R.id.toolbar);
+        android.support.v7.widget.Toolbar toolbar = findViewById(R.id.mainMenu_toolbar);
         setSupportActionBar(toolbar);
         drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle( this, drawer, toolbar,

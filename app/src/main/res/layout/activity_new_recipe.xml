@@ -1,9 +1,176 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    android:background="@drawable/felhocske"
     tools:context=".NewRecipeActivity">
 
-</android.support.constraint.ConstraintLayout>
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/newRecipe_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:minHeight="?attr/actionBarSize">
+
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="20px"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10px"
+            android:paddingTop="20px"
+            android:text="Recipe name:" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:layout_weight="0.50"
+            android:layout_marginLeft="40px"
+            android:paddingTop="20px" />
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="20px"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10px"
+            android:paddingTop="20px"
+            android:text="Category:" />
+
+        <Spinner
+            android:id="@+id/spinner_Category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="150px"
+            android:paddingTop="20px" />
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="20px"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10px"
+            android:paddingTop="20px"
+            android:text="Time:" />
+
+        <EditText
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:layout_weight="0.50"
+            android:layout_marginLeft="60px"
+            android:layout_marginRight="60px"
+            android:paddingTop="20px" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10px"
+            android:paddingTop="20px"
+            android:text="Min" />
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:orientation="vertical"
+        android:paddingTop="20px"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingLeft="10px"
+            android:paddingTop="20px"
+            android:text="Ingredients:" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:lines="20"
+            android:minLines="5"
+            android:layout_weight="0.50"
+            android:layout_marginLeft="40px"
+            android:paddingTop="20px" />
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:orientation="vertical"
+        android:paddingTop="20px"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingLeft="10px"
+            android:paddingTop="20px"
+            android:text="Steps:" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:lines="20"
+            android:minLines="5"
+            android:layout_weight="0.50"
+            android:layout_marginLeft="40px"
+            android:paddingTop="20px" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="20px"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp">
+
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:text="Picture"/>
+
+    </LinearLayout>
+
+
+
+</LinearLayout>
