@@ -7,13 +7,23 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
-    public static final String DATABASE_NAME="registerUser.db";
-    public static final String TABLE_NAME="registeruser";
-    public static final String COL_1="ID";
-    public static final String COL_2="username";
-    public static final String COL_3="password";
-    public static final String COL_4="fullname";
-    public static final String COL_5="email";
+    public static final String DATABASE_NAME="registerUser1.db";
+
+    public static final String TABLE_USER="registeruser";
+    public static final String USER_ID="ID";
+    public static final String USER_USERNAME="username";
+    public static final String USER_PASSWORD="password";
+    public static final String USER_FULLNAME="fullname";
+    public static final String USER_EMAIL="email";
+
+    public static final String TABLE_RECIPE="recipes";
+    public static final String RECIPE_ID="ID";
+    public static final String RECIPE_NAME="recipe_name";
+    public static final String RECIPE_CATEGORY="recipe_category";
+    public static final String RECIPE_TIME="recipe_time";
+    public static final String RECIPE_INGREDIENTS="recipe_ingredients";
+    public static final String RECIPE_STEPS="recipe_steps";
+    public static final String RECIPE_USER="recipe_user";
 
     public DatabaseHelper( Context context) {
         super(context, DATABASE_NAME, null, 1);
@@ -21,21 +31,33 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        sqLiteDatabase.execSQL("CREATE TABLE registeruser (ID INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT UNIQUE, password TEXT, fullname TEXT, email TEXT)");
+        sqLiteDatabase.execSQL("create table "+TABLE_USER+" (ID INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT UNIQUE, password TEXT, fullname TEXT, email TEXT)");
+        sqLiteDatabase.execSQL("create table "+TABLE_RECIPE+" (ID INTEGER PRIMARY KEY AUTOINCREMENT, recipe_name TEXT UNIQUE, recipe_category TEXT, recipe_time TEXT, recipe_ingredients TEXT,recipe_steps TEXT, recipe_user TEXT)");
     }
     public String getUsername(){
-        return COL_2;
+        return USER_USERNAME;
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_USER);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_RECIPE);
         onCreate(sqLiteDatabase);
     }
-    public String getFullname(){
-        return COL_4;
-    }
+    public long addRecipe(String recipeName, String recipeCategory, String recipeTime, String recipeIngredients, String recipeSteps, String recipeUser){
+        SQLiteDatabase db = this.getWritableDatabase();
 
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("recipe_name", recipeName);
+        contentValues.put("recipe_category", recipeCategory);
+        contentValues.put("recipe_time", recipeTime);
+        contentValues.put("recipe_ingredients", recipeIngredients);
+        contentValues.put("recipe_steps", recipeSteps);
+        contentValues.put("recipe_user", recipeUser);
+        long res = db.insert("recipes",null,contentValues);
+        db.close();
+        return res;
+    }
     public long addUser(String user, String password, String fullname, String email){
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -50,11 +72,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return res;
     }
     public boolean checkUser(String username, String password){
-        String [] columns = {COL_1};
+        String [] columns = {USER_ID};
         SQLiteDatabase db = getReadableDatabase();
-        String selection = COL_2 + "=?" + " and " + COL_3 + "=?";
+        String selection = USER_USERNAME + "=?" + " and " + USER_PASSWORD + "=?";
         String[]selectionArgs = { username, password};
-        Cursor cursor = db.query(TABLE_NAME,columns,selection,selectionArgs,null,null,null);
+        Cursor cursor = db.query(TABLE_USER,columns,selection,selectionArgs,null,null,null);
         int count = cursor.getCount();
         cursor.close();
         db.close();
@@ -65,21 +87,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return false;
     }
 
-
-
     public Cursor getEmail(String username){
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("Select " +COL_5+ " from "+TABLE_NAME+" where "+COL_2+"="+"'username'",null);
+        Cursor res = db.rawQuery("Select " +USER_FULLNAME+ " from "+TABLE_USER+" where "+USER_USERNAME+"="+"'username'",null);
         return res;
     }
     public Cursor getFullName(String username){
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("Select " +COL_4+ " from "+TABLE_NAME+" where "+COL_2+"="+"'username'",null);
+        Cursor res = db.rawQuery("Select " +USER_FULLNAME+ " from "+TABLE_USER+" where "+USER_USERNAME+"="+"'username'",null);
         return res;
     }
-    public Cursor getMinden(String username){
+    public Cursor getUsername(String username){
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("Select * from "+TABLE_NAME+" where "+COL_2+"="+"'username'",null);
+        Cursor res = db.rawQuery("Select * from "+TABLE_USER+" where "+USER_USERNAME+"="+"'username'",null);
         return res;
     }
 

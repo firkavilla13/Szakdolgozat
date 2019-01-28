@@ -58,18 +58,10 @@ public class MainMenuActivity extends AppCompatActivity implements NavigationVie
         navUsername = (TextView)header.findViewById(R.id.textView_nav_fullname);
         navEmail = (TextView)header.findViewById(R.id.textView_nav_email);
         db = new DatabaseHelper(this);
-        Cursor eredmeny2 = db.getMinden(segedUser);
+        Cursor eredmeny2 = db.getUsername(segedUser);
         navUsername.setText("Welcome");
         navEmail.setText(segedUser.toString());
-        StringBuilder stringBufferEmail = new StringBuilder();
 
-        if (eredmeny2 != null && eredmeny2.getColumnCount()>0){
-
-            while(eredmeny2.moveToNext())
-            {
-
-            }
-        }
 
     }
     public void onBackPressed(){
