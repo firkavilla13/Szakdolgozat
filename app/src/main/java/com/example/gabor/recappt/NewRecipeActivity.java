@@ -3,6 +3,9 @@ package com.example.gabor.recappt;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.provider.MediaStore;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -11,10 +14,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.io.ByteArrayOutputStream;
 
 public class NewRecipeActivity extends AppCompatActivity {
     Toolbar newRecipeToolbar;
@@ -23,7 +30,10 @@ public class NewRecipeActivity extends AppCompatActivity {
     EditText textRecipeTime;
     EditText textRecipeIngredients;
     EditText textRecipeSteps;
+    Button buttonRecipePicture;
+    ImageView imageViewCamera;
     DatabaseHelper db;
+    Bitmap recipePicture;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,17 +56,36 @@ public class NewRecipeActivity extends AppCompatActivity {
         textRecipeTime = (EditText)findViewById(R.id.editText_recipeTime);
         textRecipeIngredients = (EditText)findViewById(R.id.editText_recipeIngredients);
         textRecipeSteps = (EditText)findViewById(R.id.editText_recipeSteps);
+        buttonRecipePicture = (Button)findViewById(R.id.button_recipePicture);
+        imageViewCamera = (ImageView)findViewById(R.id.imageView_cameraPicture);
+
+        buttonRecipePicture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent takePicture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(takePicture,0);
+            }
+        });
 
 
+    }
 
-
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        recipePicture = (Bitmap)data.getExtras().get("data");
+        imageViewCamera.setImageBitmap(recipePicture);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.new_recipe_menu, menu);   //Ez kellet a Pipához
         return true;
+    }
+    public static byte[] getBytes(Bitmap recipePicture) {
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        recipePicture.compress(Bitmap.CompressFormat.PNG, 0, stream);
+        return stream.toByteArray();
     }
 
     @Override
@@ -82,7 +111,7 @@ public class NewRecipeActivity extends AppCompatActivity {
                     Toast.makeText(NewRecipeActivity.this,"Field can not be empty!",Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    long val = db.addRecipe(recipeName, recipeCategory, recipeTime, recipeIngredients, recipeSteps, recipeUser);
+                    long val = db.addRecipe(recipeName, recipeCategory, recipeTime, recipeIngredients, recipeSteps, recipeUser, getBytes(recipePicture));
 
                     if (val > 0) {
                         Toast.makeText(NewRecipeActivity.this, "New Recipe Added!", Toast.LENGTH_SHORT).show();
