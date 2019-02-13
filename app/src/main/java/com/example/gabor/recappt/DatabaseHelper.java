@@ -5,9 +5,15 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.database.sqlite.SQLiteQueryBuilder;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
-    public static final String DATABASE_NAME="registerUser1.db";
+    public static final String DATABASE_NAME="registerUser5.db";
 
     public static final String TABLE_USER="registeruser";
     public static final String USER_ID="ID";
@@ -17,13 +23,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String USER_EMAIL="email";
 
     public static final String TABLE_RECIPE="recipes";
-    public static final String RECIPE_ID="ID";
+    public static final String RECIPE_ID="recipe_id";
     public static final String RECIPE_NAME="recipe_name";
     public static final String RECIPE_CATEGORY="recipe_category";
     public static final String RECIPE_TIME="recipe_time";
     public static final String RECIPE_INGREDIENTS="recipe_ingredients";
     public static final String RECIPE_STEPS="recipe_steps";
     public static final String RECIPE_USER="recipe_user";
+    public static final String RECIPE_PICTURE="recipe_picture";
 
     public DatabaseHelper( Context context) {
         super(context, DATABASE_NAME, null, 1);
@@ -32,7 +39,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL("create table "+TABLE_USER+" (ID INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT UNIQUE, password TEXT, fullname TEXT, email TEXT)");
-        sqLiteDatabase.execSQL("create table "+TABLE_RECIPE+" (ID INTEGER PRIMARY KEY AUTOINCREMENT, recipe_name TEXT UNIQUE, recipe_category TEXT, recipe_time TEXT, recipe_ingredients TEXT,recipe_steps TEXT, recipe_user TEXT)");
+        sqLiteDatabase.execSQL("create table "+TABLE_RECIPE+" (recipe_id INTEGER PRIMARY KEY AUTOINCREMENT, recipe_name TEXT UNIQUE, recipe_category TEXT, recipe_time TEXT, recipe_ingredients TEXT,recipe_steps TEXT, recipe_user TEXT, recipe_picture BLOB)");
     }
     public String getUsername(){
         return USER_USERNAME;
@@ -44,7 +51,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_RECIPE);
         onCreate(sqLiteDatabase);
     }
-    public long addRecipe(String recipeName, String recipeCategory, String recipeTime, String recipeIngredients, String recipeSteps, String recipeUser){
+    public long addRecipe(String recipeName, String recipeCategory, String recipeTime, String recipeIngredients, String recipeSteps, String recipeUser, byte [] recipePicture){
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
@@ -54,6 +61,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put("recipe_ingredients", recipeIngredients);
         contentValues.put("recipe_steps", recipeSteps);
         contentValues.put("recipe_user", recipeUser);
+        contentValues.put("recipe_picture", recipePicture);
         long res = db.insert("recipes",null,contentValues);
         db.close();
         return res;
@@ -85,6 +93,115 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return true;
         else
             return false;
+    }
+
+    public Bitmap getImage (Integer id)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Bitmap bt = null;
+        Cursor cursor = db.rawQuery("select "+RECIPE_PICTURE+" from "+TABLE_RECIPE+" where recipe_id=?",new String[]{String.valueOf(id)});
+        if (cursor.moveToNext()){
+
+            byte[] imag = cursor.getBlob(0);
+            bt = BitmapFactory.decodeByteArray(imag,0,imag.length);
+        }
+        return bt;
+    }
+
+    public List<Recipe> getRecipe(){
+
+        SQLiteDatabase db = getReadableDatabase();
+        SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
+
+        String [] sqlSelect ={"recipe_id","recipe_name","recipe_category","recipe_time","recipe_ingredients","recipe_steps","recipe_picture"};
+        String tableName = "recipes";
+
+        qb.setTables(tableName);
+        Cursor cursor = qb.query(db,sqlSelect,null,null,null,null,null);
+        List<Recipe> result = new ArrayList<>();
+        if (cursor.moveToFirst())
+        {
+            do{
+                Recipe recipe = new Recipe();
+                recipe.setId(cursor.getInt(cursor.getColumnIndex("recipe_id")));
+                recipe.setName(cursor.getString(cursor.getColumnIndex("recipe_name")));
+                recipe.setCategory(cursor.getString(cursor.getColumnIndex("recipe_category")));
+                recipe.setTime(cursor.getString(cursor.getColumnIndex("recipe_time")));
+                recipe.setIngredients(cursor.getString(cursor.getColumnIndex("recipe_ingredients")));
+                recipe.setSteps(cursor.getString(cursor.getColumnIndex("recipe_steps")));
+             //   recipe.setPicture(cursor.getBlob(cursor.getColumnIndex("recipe_picture")));
+
+                result.add(recipe);
+            }while (cursor.moveToNext());
+        }
+        return result;
+    }
+
+    public List<String> getName(){
+        SQLiteDatabase db = getReadableDatabase();
+        SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
+
+        String [] sqlSelect ={"recipe_name"};
+        String tableName = "recipes";
+
+        qb.setTables(tableName);
+        Cursor cursor = qb.query(db,sqlSelect,null,null,null,null,null);
+        List<String> result = new ArrayList<>();
+        if (cursor.moveToFirst())
+        {
+            do{
+                result.add(cursor.getString(cursor.getColumnIndex("recipe_name")));
+            }while (cursor.moveToNext());
+        }
+        return result;
+    }
+
+    public List<Recipe> getRecipeByName(String recipeName){
+
+        SQLiteDatabase db = getReadableDatabase();
+        SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
+
+        String [] sqlSelect ={"recipe_id","recipe_name","recipe_category","recipe_time","recipe_ingredients","recipe_steps","recipe_picture"};
+        String tableName = "recipes";
+
+        qb.setTables(tableName);
+        Cursor cursor = qb.query(db,sqlSelect,"recipe_name LIKE ?",new String[]{"%"+recipeName+"%"},null,null,null,null);
+        List<Recipe> result = new ArrayList<>();
+        if (cursor.moveToFirst())
+        {
+            do{
+                Recipe recipe = new Recipe();
+                recipe.setId(cursor.getInt(cursor.getColumnIndex("recipe_id")));
+                recipe.setName(cursor.getString(cursor.getColumnIndex("recipe_name")));
+                recipe.setCategory(cursor.getString(cursor.getColumnIndex("recipe_category")));
+                recipe.setTime(cursor.getString(cursor.getColumnIndex("recipe_time")));
+                recipe.setIngredients(cursor.getString(cursor.getColumnIndex("recipe_ingredients")));
+                recipe.setSteps(cursor.getString(cursor.getColumnIndex("recipe_steps")));
+              //  recipe.setPicture(cursor.getBlob(cursor.getColumnIndex("recipe_picture")));
+
+                result.add(recipe);
+            }while (cursor.moveToNext());
+        }
+        return result;
+    }
+
+    public Cursor viewData(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "Select * from "+TABLE_RECIPE;
+        Cursor cursor = db.rawQuery(query, null);
+
+        return cursor;
+    }
+
+
+
+    public Cursor searchRecipe(String text)
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "Select * from "+TABLE_RECIPE+" WHERE "+RECIPE_NAME+" Like '%"+text+"%'";
+        Cursor cursor = db.rawQuery(query, null);
+
+        return cursor;
     }
 
     public Cursor getEmail(String username){

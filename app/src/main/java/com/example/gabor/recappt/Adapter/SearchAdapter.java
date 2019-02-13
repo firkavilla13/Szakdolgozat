@@ -1,0 +1,133 @@
+package com.example.gabor.recappt.Adapter;
+
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.gabor.recappt.DatabaseHelper;
+import com.example.gabor.recappt.ItemClickListener;
+import com.example.gabor.recappt.R;
+import com.example.gabor.recappt.Recipe;
+import java.util.List;
+
+
+
+class SearchViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener,View.OnLongClickListener {
+
+    public TextView recipeName,recipeCategory,recipeTime;
+    public ImageView recipePicture;
+    private ItemClickListener itemClickListener;
+
+
+
+
+
+
+
+    public SearchViewHolder(View itemView){
+        super(itemView);
+        recipeName = (TextView)itemView.findViewById(R.id.tv_recieName);
+        recipeCategory = (TextView)itemView.findViewById(R.id.tv_recieCategory);
+        recipeTime = (TextView)itemView.findViewById(R.id.tv_recieTime);
+        recipePicture = (ImageView)itemView.findViewById(R.id.imageView_recipePicture);
+
+        recipePicture.setOnClickListener(this);
+        recipePicture.setOnLongClickListener(this);
+    }
+
+    public void setItemClickListener(ItemClickListener itemClickListener){
+
+        this.itemClickListener = itemClickListener;
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        itemClickListener.onClick(v,getAdapterPosition(),false);
+    }
+
+    @Override
+    public boolean onLongClick(View v) {
+        itemClickListener.onClick(v,getAdapterPosition(),true);
+        return true;
+    }
+}
+
+public class SearchAdapter extends RecyclerView.Adapter<SearchViewHolder>{
+
+    private Context context;
+    private List<Recipe> recipes;
+    public DatabaseHelper db;
+    byte[] bytekep;
+    Bitmap bitmapkep;
+
+
+
+
+
+
+    public SearchAdapter (Context context, List<Recipe> recipes){
+        this.context = context;
+        this.recipes = recipes;
+        this.db = new DatabaseHelper(context);
+
+    }
+
+    @NonNull
+    @Override
+    public SearchViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        View itemView = inflater.inflate(R.layout.layout_recipes,parent,false);
+        return new SearchViewHolder(itemView);
+    }
+
+
+
+
+
+
+    @Override
+    public void onBindViewHolder(@NonNull SearchViewHolder holder, int position) {
+
+
+
+        Bitmap kep = db.getImage(position+1);
+
+        holder.recipeName.setText(recipes.get(position).getName());
+        holder.recipeCategory.setText(recipes.get(position).getCategory());
+        holder.recipeTime.setText(recipes.get(position).getTime());
+        //holder.recipePicture.setImageBitmap(bytekep);
+        holder.recipePicture.setImageBitmap(kep);
+
+
+        holder.setItemClickListener(new ItemClickListener() {
+            @Override
+            public void onClick(View view, int position, boolean isLongClick) {
+                if (isLongClick)
+                    Toast.makeText(context,"Long Click: "+recipes.get(position).getName(), Toast.LENGTH_SHORT).show();
+                else
+                    Toast.makeText(context,"    Click: "+recipes.get(position).getId(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+
+    }
+
+
+
+
+    @Override
+    public int getItemCount() {
+        return recipes.size();
+    }
+}
+

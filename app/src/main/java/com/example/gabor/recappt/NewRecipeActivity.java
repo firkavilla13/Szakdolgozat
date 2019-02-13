@@ -58,6 +58,8 @@ public class NewRecipeActivity extends AppCompatActivity {
         textRecipeSteps = (EditText)findViewById(R.id.editText_recipeSteps);
         buttonRecipePicture = (Button)findViewById(R.id.button_recipePicture);
         imageViewCamera = (ImageView)findViewById(R.id.imageView_cameraPicture);
+        imageViewCamera.setImageResource(R.drawable.napocska);
+
 
         buttonRecipePicture.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,9 +74,12 @@ public class NewRecipeActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        recipePicture = (Bitmap)data.getExtras().get("data");
-        imageViewCamera.setImageBitmap(recipePicture);
+        if (requestCode == requestCode && resultCode == RESULT_OK) {
+            super.onActivityResult(requestCode, resultCode, data);
+            recipePicture = (Bitmap) data.getExtras().get("data");
+            imageViewCamera.setImageBitmap(recipePicture);
+        }
+
     }
 
     @Override
