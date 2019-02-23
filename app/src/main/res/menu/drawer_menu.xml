@@ -8,7 +8,7 @@
         <item
             android:id="@+id/nav_fomenu"
             android:icon="@drawable/ic_menu"
-            android:title="Main Menu"/>
+            android:title="All Recipes"/>
         <item
             android:id="@+id/nav_recipe"
             android:icon="@drawable/ic_restaurant_menu_black_24dp"

@@ -95,11 +95,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return false;
     }
 
-    public Bitmap getImage (Integer id)
+    public Bitmap getImage (String recipename)
     {
         SQLiteDatabase db = this.getWritableDatabase();
         Bitmap bt = null;
-        Cursor cursor = db.rawQuery("select "+RECIPE_PICTURE+" from "+TABLE_RECIPE+" where recipe_id=?",new String[]{String.valueOf(id)});
+        Cursor cursor = db.rawQuery("select "+RECIPE_PICTURE+" from "+TABLE_RECIPE+" where recipe_name=?",new String[]{String.valueOf(recipename)});
         if (cursor.moveToNext()){
 
             byte[] imag = cursor.getBlob(0);
@@ -130,6 +130,42 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 recipe.setIngredients(cursor.getString(cursor.getColumnIndex("recipe_ingredients")));
                 recipe.setSteps(cursor.getString(cursor.getColumnIndex("recipe_steps")));
              //   recipe.setPicture(cursor.getBlob(cursor.getColumnIndex("recipe_picture")));
+
+                result.add(recipe);
+            }while (cursor.moveToNext());
+        }
+        return result;
+    }
+
+    public void delete(int id)
+    {
+        SQLiteDatabase database = this.getWritableDatabase();
+        database.delete(TABLE_RECIPE, RECIPE_ID + " = " + id, null);
+        database.close();
+    }
+
+    public List<Recipe> getRecipesByCategory(String recipeCategory, String user){
+
+        SQLiteDatabase db = getReadableDatabase();
+        SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
+
+        String [] sqlSelect ={"recipe_id","recipe_name","recipe_category","recipe_time","recipe_ingredients","recipe_steps","recipe_user","recipe_picture"};
+        String tableName = "recipes";
+
+        qb.setTables(tableName);
+        Cursor cursor = qb.query(db,sqlSelect,"recipe_category LIKE ? AND recipe_user = ?",new String[]{"%"+recipeCategory+"%",user},null,null,null,null);
+        List<Recipe> result = new ArrayList<>();
+        if (cursor.moveToFirst())
+        {
+            do{
+                Recipe recipe = new Recipe();
+                recipe.setId(cursor.getInt(cursor.getColumnIndex("recipe_id")));
+                recipe.setName(cursor.getString(cursor.getColumnIndex("recipe_name")));
+                recipe.setCategory(cursor.getString(cursor.getColumnIndex("recipe_category")));
+                recipe.setTime(cursor.getString(cursor.getColumnIndex("recipe_time")));
+                recipe.setIngredients(cursor.getString(cursor.getColumnIndex("recipe_ingredients")));
+                recipe.setSteps(cursor.getString(cursor.getColumnIndex("recipe_steps")));
+                //  recipe.setPicture(cursor.getBlob(cursor.getColumnIndex("recipe_picture")));
 
                 result.add(recipe);
             }while (cursor.moveToNext());

@@ -25,14 +25,8 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        db = new DatabaseHelper(this);
-        textUsername = (EditText)findViewById(R.id.editText_username);
-        textPassword = (EditText)findViewById(R.id.editText_password);
-        textConfirmPassword=(EditText)findViewById(R.id.editText_confirm_password);
-        textFullName=(EditText)findViewById(R.id.editText_username);
-        textEmail=(EditText)findViewById(R.id.eddiText_email);
-        buttonRegister = (Button)findViewById(R.id.button_register);
-        textViewLogin = (TextView) findViewById(R.id.textView_login);
+        init();
+
         textViewLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,6 +73,18 @@ public class RegisterActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    public void init()
+    {
+        db = new DatabaseHelper(this);
+        textUsername = (EditText)findViewById(R.id.editText_username);
+        textPassword = (EditText)findViewById(R.id.editText_password);
+        textConfirmPassword=(EditText)findViewById(R.id.editText_confirm_password);
+        textFullName=(EditText)findViewById(R.id.editText_username);
+        textEmail=(EditText)findViewById(R.id.eddiText_email);
+        buttonRegister = (Button)findViewById(R.id.button_register);
+        textViewLogin = (TextView) findViewById(R.id.textView_login);
     }
 
 }

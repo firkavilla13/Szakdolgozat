@@ -35,35 +35,48 @@ public class MainMenuActivity extends AppCompatActivity implements NavigationVie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
 
+        init();
+
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-        mainGrid = (GridLayout)findViewById(R.id.mainGrid);
-        setSingleEvent(mainGrid);
+        navigationView.removeHeaderView(navigationView.getHeaderView(0));
 
         android.support.v7.widget.Toolbar toolbar = findViewById(R.id.mainMenu_toolbar);
         setSupportActionBar(toolbar);
-        drawer = findViewById(R.id.drawer_layout);
+
+        setSingleEvent(mainGrid);
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle( this, drawer, toolbar,
                 R.string.navigation_drawer_open, R.string.navigation_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-        navigationView.removeHeaderView(navigationView.getHeaderView(0));
 
 
 
-        SharedPreferences sharedPreferences=getSharedPreferences("MyData", Context.MODE_PRIVATE);
-        String segedUser = sharedPreferences.getString("sharedUsername","Empty");
         View header = navigationView.inflateHeaderView(R.layout.nav_header);
         navUsername = (TextView)header.findViewById(R.id.textView_nav_fullname);
         navEmail = (TextView)header.findViewById(R.id.textView_nav_email);
-        db = new DatabaseHelper(this);
-        Cursor eredmeny2 = db.getUsername(segedUser);
+
+        SharedPreferences sharedPreferences=getSharedPreferences("MyData", Context.MODE_PRIVATE);
+        String segedUser = sharedPreferences.getString("sharedUsername","Empty");
+
+       // Cursor eredmeny2 = db.getUsername(segedUser); Nem használtam
+
         navUsername.setText("Welcome");
         navEmail.setText(segedUser.toString());
 
 
     }
+
+    public void init()
+    {
+
+        mainGrid = (GridLayout)findViewById(R.id.mainGrid);
+        drawer = findViewById(R.id.drawer_layout);
+        db = new DatabaseHelper(this);
+
+    }
+
     public void onBackPressed(){
         if (drawer.isDrawerOpen(GravityCompat.START)){
             drawer.closeDrawer(GravityCompat.START);

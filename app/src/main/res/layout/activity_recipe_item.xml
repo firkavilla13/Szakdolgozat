@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    tools:context=".RecipeItemActivity">
+
+
+
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/recipeItem_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#FFFF00"
+        android:minHeight="?attr/actionBarSize">
+
+    </android.support.v7.widget.Toolbar>
+
+    <ImageView
+
+        android:id="@+id/imageView_recipeItemPicture"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:src="@drawable/napocska"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_gravity="center">
+
+        <TextView
+            android:id="@+id/textView_recipeID"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ID: "/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/textView_recipeItemName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Recipe name: "/>
+            <TextView
+                android:id="@+id/textView_recipeItemNameDb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:text="recipe_name"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView_recipeItemCategory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Recipe Category: "/>
+            <TextView
+                android:id="@+id/textView_recipeItemCategoryDb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:text="recipe_category"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView_recipeItemTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Time: "/>
+            <TextView
+                android:id="@+id/textView_recipeItemTimeDb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:text="recipe_time"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView_recipeItemIngredients"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ingredients: "/>
+            <TextView
+                android:id="@+id/textView_recipeItemIngredientsDb"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:minLines="5"
+                android:maxLines="200"
+                android:scrollbarAlwaysDrawVerticalTrack="true"
+                android:text="recipe_ingredients"/>
+
+            <TextView
+                android:id="@+id/textView_recipeItemSteps"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Steps: "/>
+            <TextView
+                android:id="@+id/textView_recipeItemStepsDb"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:minLines="5"
+                android:text="recipe_steps"/>
+
+
+        </LinearLayout>
+
+        </LinearLayout>
+
+</LinearLayout>

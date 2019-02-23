@@ -23,11 +23,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        db = new DatabaseHelper(this);
-        editTextUsername = (EditText)findViewById(R.id.editText_username);
-        editTextPassword = (EditText)findViewById(R.id.editText_password);
-        buttonLogin = (Button)findViewById(R.id.button_login);
-        textViewRegister = (TextView) findViewById(R.id.textView_register);
+        init();
+
+
         textViewRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,5 +57,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+    }
+
+    public void init()
+    {
+        db = new DatabaseHelper(this);
+        editTextUsername = (EditText)findViewById(R.id.editText_username);
+        editTextPassword = (EditText)findViewById(R.id.editText_password);
+        buttonLogin = (Button)findViewById(R.id.button_login);
+        textViewRegister = (TextView) findViewById(R.id.textView_register);
     }
 }

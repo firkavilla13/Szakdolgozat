@@ -1,8 +1,10 @@
 package com.example.gabor.recappt.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -16,6 +18,8 @@ import com.example.gabor.recappt.DatabaseHelper;
 import com.example.gabor.recappt.ItemClickListener;
 import com.example.gabor.recappt.R;
 import com.example.gabor.recappt.Recipe;
+import com.example.gabor.recappt.RecipeItemActivity;
+
 import java.util.List;
 
 
@@ -74,6 +78,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchViewHolder>{
 
 
 
+
     public SearchAdapter (Context context, List<Recipe> recipes){
         this.context = context;
         this.recipes = recipes;
@@ -99,8 +104,9 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchViewHolder>{
 
 
 
-        Bitmap kep = db.getImage(position+1);
 
+
+        Bitmap kep = db.getImage(recipes.get(position).getName());
         holder.recipeName.setText(recipes.get(position).getName());
         holder.recipeCategory.setText(recipes.get(position).getCategory());
         holder.recipeTime.setText(recipes.get(position).getTime());
@@ -111,8 +117,24 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchViewHolder>{
         holder.setItemClickListener(new ItemClickListener() {
             @Override
             public void onClick(View view, int position, boolean isLongClick) {
-                if (isLongClick)
-                    Toast.makeText(context,"Long Click: "+recipes.get(position).getName(), Toast.LENGTH_SHORT).show();
+                if (isLongClick) {
+                    Toast.makeText(context, "Long Click: " + recipes.get(position).getName(), Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(view.getContext(), RecipeItemActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+
+                    Bundle bundle = new Bundle();
+                    bundle.putString("recipeName", recipes.get(position).getName());
+                    bundle.putString("recipeCategory", recipes.get(position).getCategory());
+                    bundle.putString("recipeTime", recipes.get(position).getTime());
+                    bundle.putString("recipeIngredients", recipes.get(position).getIngredients());
+                    bundle.putString("recipeSteps", recipes.get(position).getSteps());
+                    bundle.putInt("id",recipes.get(position).getId());
+                    bundle.putParcelable("recipePicture", db.getImage(recipes.get(position).getName()));
+
+                    intent.putExtras(bundle);
+                    view.getContext().startActivity(intent);
+                }
+
                 else
                     Toast.makeText(context,"    Click: "+recipes.get(position).getId(), Toast.LENGTH_SHORT).show();
             }

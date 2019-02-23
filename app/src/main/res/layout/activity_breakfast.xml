@@ -10,12 +10,23 @@
 
 
 
-   <com.mancj.materialsearchbar.MaterialSearchBar
-       android:id="@+id/search_bar"
-       android:layout_alignParentTop="true"
-       app:mt_speechMode="false"
-       app:mt_hint="Search"
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/recipeCategory_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#ffffff"
+        android:minHeight="?attr/actionBarSize">
 
+    </android.support.v7.widget.Toolbar>
+
+   <com.mancj.materialsearchbar.MaterialSearchBar
+
+       android:layout_below="@+id/recipeCategory_toolbar"
+       android:id="@+id/search_bar"
+       app:mt_speechMode="false"
+       app:mt_placeholder="Search for a recipe"
+
+       app:mt_hint="Search"
        android:layout_width="match_parent"
        android:layout_height="wrap_content"/>
 

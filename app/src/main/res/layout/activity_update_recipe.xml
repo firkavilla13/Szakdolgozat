@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:layout_gravity="center"
     android:background="@drawable/felhocske"
-    tools:context=".NewRecipeActivity">
+    tools:context=".UpdateRecipeActivity">
 
 
     <android.support.v7.widget.Toolbar
@@ -40,7 +40,7 @@
             android:maxLines="1"
             android:layout_weight="0.50"
             android:layout_marginLeft="40px"
-             />
+            />
 
 
     </LinearLayout>
@@ -63,7 +63,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginLeft="150px"
-             />
+            />
 
 
     </LinearLayout>

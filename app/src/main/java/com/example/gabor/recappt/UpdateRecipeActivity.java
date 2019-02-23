@@ -24,7 +24,7 @@ import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
 
-public class NewRecipeActivity extends AppCompatActivity {
+public class UpdateRecipeActivity extends AppCompatActivity {
     Toolbar newRecipeToolbar;
     Spinner spinnerCategory;
     EditText textRecipeName;
@@ -35,17 +35,29 @@ public class NewRecipeActivity extends AppCompatActivity {
     ImageView imageViewCamera;
     DatabaseHelper db;
     Bitmap recipePicture;
-    Bitmap defaultPicture;
+
+    int id;
+    String recipeName;
+    String recipeCategory;
+    String recipeTime;
+    String recipeIngredients;
+    String recipeSteps;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_recipe);
-
+        setContentView(R.layout.activity_update_recipe);
+        initBunde();
         init();
 
-        recipePicture =  BitmapFactory.decodeResource(getResources(), R.drawable.felhocske);
+
+
         imageViewCamera.setImageBitmap(recipePicture);
+
+        textRecipeName.setText(recipeName);
+        textRecipeTime.setText(recipeTime);
+        textRecipeIngredients.setText(recipeIngredients);
+        textRecipeSteps.setText(recipeSteps);
 
         buttonRecipePicture.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,7 +81,7 @@ public class NewRecipeActivity extends AppCompatActivity {
         spinnerCategory=(Spinner)findViewById(R.id.spinner_recipeCategory);
         newRecipeToolbar.setLogo(R.drawable.napteszt);
         setSupportActionBar(newRecipeToolbar);
-        getSupportActionBar().setTitle("New Recipe");
+        getSupportActionBar().setTitle("Update Recipe");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);  //Ez hozza be a vissza gombot
 
         String [] categories={"Breakfast","Lunch","Dinner","Dessert"};
@@ -77,6 +89,18 @@ public class NewRecipeActivity extends AppCompatActivity {
         spinnerCategory.setAdapter(adapter);
 
         db = new DatabaseHelper(this);
+    }
+
+    public void initBunde()
+    {
+        Bundle bundle = getIntent().getExtras();
+        id = bundle.getInt("id");
+        recipeName = bundle.getString("recipeName");
+        recipeCategory = bundle.getString("recipeCategory");
+        recipeTime = bundle.getString("recipeTime");
+        recipeIngredients = bundle.getString("recipeIngredients");
+        recipeSteps = bundle.getString("recipeSteps");
+        recipePicture = getIntent().getExtras().getParcelable("recipePicture");
     }
 
     @Override
@@ -108,7 +132,7 @@ public class NewRecipeActivity extends AppCompatActivity {
             case R.id.action_pipa:
 
                 if (imageViewCamera.equals(R.drawable.napocska)) {
-                    Toast.makeText(NewRecipeActivity.this, "Take a picture!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UpdateRecipeActivity.this, "Take a picture!", Toast.LENGTH_SHORT).show();
                 }
                 else{
 
@@ -123,27 +147,27 @@ public class NewRecipeActivity extends AppCompatActivity {
                     String recipeUser = segedUser.toString().trim();
 
                     if (recipeName.matches("") || recipeCategory.matches("") || recipeTime.matches("") || recipeIngredients.matches("") || recipeSteps.matches("")) {
-                        Toast.makeText(NewRecipeActivity.this, "Field can not be empty!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(UpdateRecipeActivity.this, "Field can not be empty!", Toast.LENGTH_SHORT).show();
                     } else {
                         long val = db.addRecipe(recipeName, recipeCategory, recipeTime, recipeIngredients, recipeSteps, recipeUser, getBytes(recipePicture));
 
                         if (val > 0) {
-                            Toast.makeText(NewRecipeActivity.this, "New Recipe Added!", Toast.LENGTH_SHORT).show();
-                            Intent moveToLogin = new Intent(NewRecipeActivity.this, MainMenuActivity.class);
+                            Toast.makeText(UpdateRecipeActivity.this, "New Recipe Added!", Toast.LENGTH_SHORT).show();
+                            Intent moveToLogin = new Intent(UpdateRecipeActivity.this, MainMenuActivity.class);
                             startActivity(moveToLogin);
                         } else {
-                            Toast.makeText(NewRecipeActivity.this, "Something went wrong!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(UpdateRecipeActivity.this, "Something went wrong!", Toast.LENGTH_SHORT).show();
                         }
                     }
                 }
                 break;
             case android.R.id.home:
-                Intent intent = new Intent(NewRecipeActivity.this, MainMenuActivity.class);
+                Intent intent = new Intent(UpdateRecipeActivity.this, BreakfastActivity.class);
                 startActivity(intent);
                 finish();
                 break;
         }
-            return super.onOptionsItemSelected(item);
+        return super.onOptionsItemSelected(item);
     }
 }
 
