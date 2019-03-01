@@ -106,7 +106,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchViewHolder>{
 
 
 
-        Bitmap kep = db.getImage(recipes.get(position).getName());
+        Bitmap kep = db.getImage(recipes.get(position).getId());
         holder.recipeName.setText(recipes.get(position).getName());
         holder.recipeCategory.setText(recipes.get(position).getCategory());
         holder.recipeTime.setText(recipes.get(position).getTime());
@@ -121,7 +121,6 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchViewHolder>{
                     Toast.makeText(context, "Long Click: " + recipes.get(position).getName(), Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(view.getContext(), RecipeItemActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-
                     Bundle bundle = new Bundle();
                     bundle.putString("recipeName", recipes.get(position).getName());
                     bundle.putString("recipeCategory", recipes.get(position).getCategory());
@@ -129,7 +128,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchViewHolder>{
                     bundle.putString("recipeIngredients", recipes.get(position).getIngredients());
                     bundle.putString("recipeSteps", recipes.get(position).getSteps());
                     bundle.putInt("id",recipes.get(position).getId());
-                    bundle.putParcelable("recipePicture", db.getImage(recipes.get(position).getName()));
+                    bundle.putParcelable("recipePicture", db.getImage(recipes.get(position).getId()));
 
                     intent.putExtras(bundle);
                     view.getContext().startActivity(intent);
