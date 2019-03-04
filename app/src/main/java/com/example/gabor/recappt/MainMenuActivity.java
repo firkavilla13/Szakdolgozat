@@ -122,27 +122,40 @@ public class MainMenuActivity extends AppCompatActivity implements NavigationVie
                 public void onClick(View v) {
                     if(finalI==0)
                     {
+
+                        Bundle bundle = new Bundle();
+                        String category = "Breakfast";
+                        bundle.putString("category", category);
                         Intent intent = new Intent(MainMenuActivity.this,BreakfastActivity.class);
-                        intent.putExtra("info","This is Activity from card item with index "+finalI);
+                        intent.putExtras(bundle);
                         startActivity(intent);
 
                     }
                     else if(finalI==1)
                     {
+                        Bundle bundle = new Bundle();
+                        String category = "Lunch";
+                        bundle.putString("category", category);
                         Intent intent = new Intent(MainMenuActivity.this,BreakfastActivity.class);
-                        intent.putExtra("info","This is Activity from card item with index "+finalI);
+                        intent.putExtras(bundle);
                         startActivity(intent);
                     }
                     else if(finalI==2)
                     {
+                        Bundle bundle = new Bundle();
+                        String category = "Dinner";
+                        bundle.putString("category", category);
                         Intent intent = new Intent(MainMenuActivity.this,BreakfastActivity.class);
-                        intent.putExtra("info","This is Activity from card item with index "+finalI);
+                        intent.putExtras(bundle);
                         startActivity(intent);
                     }
                     else if(finalI==3)
                     {
+                        Bundle bundle = new Bundle();
+                        String category = "Dessert";
+                        bundle.putString("category", category);
                         Intent intent = new Intent(MainMenuActivity.this,BreakfastActivity.class);
-                        intent.putExtra("info","This is Activity from card item with index "+finalI);
+                        intent.putExtras(bundle);
                         startActivity(intent);
                     }
                     else{

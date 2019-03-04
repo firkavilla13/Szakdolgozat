@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
-    public static final String DATABASE_NAME="registerUser5.db";
+    public static final String DATABASE_NAME="teszt2.db";
 
     public static final String TABLE_USER="registeruser";
     public static final String USER_ID="ID";
@@ -38,8 +38,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        sqLiteDatabase.execSQL("create table "+TABLE_USER+" (ID INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT UNIQUE, password TEXT, fullname TEXT, email TEXT)");
-        sqLiteDatabase.execSQL("create table "+TABLE_RECIPE+" (recipe_id INTEGER PRIMARY KEY AUTOINCREMENT, recipe_name TEXT UNIQUE, recipe_category TEXT, recipe_time TEXT, recipe_ingredients TEXT,recipe_steps TEXT, recipe_user TEXT, recipe_picture BLOB)");
+        sqLiteDatabase.execSQL("create table "+TABLE_USER+" (ID INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT UNIQUE, password TEXT, fullname TEXT, email TEXT UNIQUE)");
+        sqLiteDatabase.execSQL("create table "+TABLE_RECIPE+" (recipe_id INTEGER PRIMARY KEY AUTOINCREMENT, recipe_name TEXT  , recipe_category TEXT, recipe_time TEXT, recipe_ingredients TEXT,recipe_steps TEXT, recipe_user TEXT, recipe_picture BLOB)");
     }
     public String getUsername(){
         return USER_USERNAME;
@@ -51,6 +51,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_RECIPE);
         onCreate(sqLiteDatabase);
     }
+
+    public boolean updateRecipe(String recipeId,String recipeName, String recipeCategory, String recipeTime, String recipeIngredients, String recipeSteps, byte [] recipePicture)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("recipe_id",recipeId);
+        contentValues.put("recipe_name", recipeName);
+        contentValues.put("recipe_category", recipeCategory);
+        contentValues.put("recipe_time", recipeTime);
+        contentValues.put("recipe_ingredients", recipeIngredients);
+        contentValues.put("recipe_steps", recipeSteps);
+        contentValues.put("recipe_picture", recipePicture);
+        db.update("recipes",contentValues,"recipe_id = ?",new String[] { recipeId});
+        return true;
+    }
+
     public long addRecipe(String recipeName, String recipeCategory, String recipeTime, String recipeIngredients, String recipeSteps, String recipeUser, byte [] recipePicture){
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -95,11 +111,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return false;
     }
 
-    public Bitmap getImage (String recipename)
+    public Bitmap getImage (int id)
     {
         SQLiteDatabase db = this.getWritableDatabase();
         Bitmap bt = null;
-        Cursor cursor = db.rawQuery("select "+RECIPE_PICTURE+" from "+TABLE_RECIPE+" where recipe_name=?",new String[]{String.valueOf(recipename)});
+        Cursor cursor = db.rawQuery("select "+RECIPE_PICTURE+" from "+TABLE_RECIPE+" where recipe_id=?",new String[]{String.valueOf(id)});
         if (cursor.moveToNext()){
 
             byte[] imag = cursor.getBlob(0);
@@ -192,7 +208,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return result;
     }
 
-    public List<Recipe> getRecipeByName(String recipeName){
+    public List<Recipe> getRecipeByName(String recipeName, String recipeCategory){
 
         SQLiteDatabase db = getReadableDatabase();
         SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
@@ -201,7 +217,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String tableName = "recipes";
 
         qb.setTables(tableName);
-        Cursor cursor = qb.query(db,sqlSelect,"recipe_name LIKE ?",new String[]{"%"+recipeName+"%"},null,null,null,null);
+        Cursor cursor = qb.query(db,sqlSelect,"recipe_name LIKE ? AND recipe_category = ?",new String[]{recipeName,recipeCategory},null,null,null,null);
         List<Recipe> result = new ArrayList<>();
         if (cursor.moveToFirst())
         {
@@ -255,6 +271,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor res = db.rawQuery("Select * from "+TABLE_USER+" where "+USER_USERNAME+"="+"'username'",null);
         return res;
     }
+
 
 
 }

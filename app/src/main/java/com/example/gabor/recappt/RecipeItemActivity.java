@@ -1,9 +1,11 @@
 package com.example.gabor.recappt;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -65,7 +67,7 @@ public class RecipeItemActivity extends AppCompatActivity {
         toolbarRecipeItem = (Toolbar) findViewById(R.id.recipeItem_toolbar);
         toolbarRecipeItem.setLogo(R.drawable.napteszt);
         setSupportActionBar(toolbarRecipeItem);
-     
+
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Ez hozza be a vissz agombot
         textRecipeID = (TextView)findViewById(R.id.textView_recipeID);
@@ -105,26 +107,75 @@ public class RecipeItemActivity extends AppCompatActivity {
 
     public boolean onOptionsItemSelected(MenuItem item) {
         String msg=" ";
+
+        Bundle bundle;
         switch(item.getItemId()) {
 
             case android.R.id.home:
+
+
+
+
+               bundle = new Bundle();
+                String category = recipeCategory;
+                bundle.putString("category", category);
                 Intent intent = new Intent(RecipeItemActivity.this, BreakfastActivity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
                 startActivity(intent);
                 finish();
                 break;
 
             case R.id.action_delete:
 
-                db.delete(id);
-                Intent intent2 = new Intent(RecipeItemActivity.this, BreakfastActivity.class);
-                startActivity(intent2);
-                finish();
-                Toast.makeText(RecipeItemActivity.this, recipeName+" is deleted !", Toast.LENGTH_SHORT).show();
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+                builder.setTitle("Delete "+recipeName);
+                builder.setMessage("Are you sure you want to delete "+recipeName+" ?");
+
+                builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Do nothing but close the dialog
+
+                        db.delete(id);
+                        Intent intent2 = new Intent(RecipeItemActivity.this, BreakfastActivity.class);
+                        startActivity(intent2);
+                        finish();
+                        Toast.makeText(RecipeItemActivity.this, recipeName+" is deleted !", Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+
+                        Bundle bundle = new Bundle();
+                        String category = recipeCategory;
+                        bundle.putString("category", category);
+                        Intent intent = new Intent(RecipeItemActivity.this,BreakfastActivity.class);
+                        intent.putExtras(bundle);
+                        startActivity(intent);
+                    }
+                });
+
+
+                builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        // Do nothing
+                        dialog.dismiss();
+
+                    }
+
+                });
+
+                AlertDialog alert = builder.create();
+                alert.show();
                 break;
+
             case R.id.action_update:
 
 
-                Bundle bundle = new Bundle();
+                 bundle = new Bundle();
                 bundle.putString("recipeName", recipeName);
                 bundle.putString("recipeCategory", recipeCategory);
                 bundle.putString("recipeTime", recipeTime);

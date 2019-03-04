@@ -36,13 +36,15 @@ public class BreakfastActivity extends AppCompatActivity {
     List<String> suggestList = new ArrayList<>();
     DatabaseHelper db;
     String recipeUser;
+    String category;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_breakfast);
-
+        initBundle();
         init();
+
 
         //Username kinyerése hogy csak azokat listázza ami ahhoz az userhez tartozik akivel beléptünk
         SharedPreferences sharedPreferences=getSharedPreferences("MyData", Context.MODE_PRIVATE);
@@ -81,7 +83,7 @@ public class BreakfastActivity extends AppCompatActivity {
             public void onSearchStateChanged(boolean enabled) {
                 if(!enabled)
                 {
-                    adapter = new SearchAdapter(getBaseContext(),db.getRecipesByCategory("Breakfast",recipeUser));
+                    adapter = new SearchAdapter(getBaseContext(),db.getRecipesByCategory(category,recipeUser));
                     recyclerView.setAdapter(adapter);
                 }
             }
@@ -96,7 +98,7 @@ public class BreakfastActivity extends AppCompatActivity {
         });
         //Init adapter
 
-        adapter = new SearchAdapter(this,db.getRecipesByCategory("Breakfast",recipeUser));
+        adapter = new SearchAdapter(this,db.getRecipesByCategory(category,recipeUser));
         recyclerView.setAdapter(adapter);
 
     }
@@ -108,7 +110,7 @@ public class BreakfastActivity extends AppCompatActivity {
         newRecipeToolbar.setLogo(R.drawable.napteszt);
         setSupportActionBar(newRecipeToolbar);
         newRecipeToolbar.setBackgroundColor(Color.YELLOW);
-        getSupportActionBar().setTitle("Breakfast");
+        getSupportActionBar().setTitle(category);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         //init view
         recyclerView = (RecyclerView)findViewById(R.id.recycler_search);
@@ -122,9 +124,17 @@ public class BreakfastActivity extends AppCompatActivity {
 
     }
 
+    public void initBundle(){
+
+        Bundle bundle = getIntent().getExtras();
+        category = bundle.getString("category");
+
+    }
+
+
     private void startSearch(String text) {
 
-        adapter = new SearchAdapter(this,db.getRecipeByName(text));
+        adapter = new SearchAdapter(this,db.getRecipeByName(text,category));
         recyclerView.setAdapter(adapter);
     }
 

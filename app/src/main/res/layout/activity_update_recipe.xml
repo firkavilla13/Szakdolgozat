@@ -101,7 +101,7 @@
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="160dp"
         android:orientation="vertical"
         android:paddingTop="25dp"
         android:layout_marginLeft="50dp"
@@ -117,7 +117,6 @@
             android:id="@+id/editText_recipeIngredients"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:layout_weight="0.50"
             android:layout_marginLeft="40dp"/>
 
@@ -125,7 +124,7 @@
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="160dp"
         android:orientation="vertical"
         android:paddingTop="25dp"
         android:layout_marginLeft="50dp"
@@ -142,35 +141,35 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:lines="20"
-            android:minLines="7"
             android:layout_weight="0.50"
             android:layout_marginLeft="40dp"/>
 
 
     </LinearLayout>
 
-    <LinearLayout
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingTop="20dp"
+        android:orientation="vertical"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp">
 
-        <Button
-            android:id="@+id/button_recipePicture"
-            android:layout_width="100dp"
-            android:layout_height="60dp"
-            android:text="Add Picture"/>
-        <ImageView
-            android:id="@+id/imageView_cameraPicture"
-            android:layout_marginLeft="30dp"
-            android:layout_width="150dp"
-            android:layout_height="110dp" />
+    <Button
+        android:id="@+id/button_recipePicture"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        android:text="Take a picture"/>
 
 
-    </LinearLayout>
+    <ImageView
+        android:orientation="horizontal"
+        android:id="@+id/imageView_cameraPicture"
+        android:layout_marginLeft="150dp"
+        android:layout_width="150dp"
+        android:layout_height="100dp" />
 
 
+    </RelativeLayout>
 
 </LinearLayout>

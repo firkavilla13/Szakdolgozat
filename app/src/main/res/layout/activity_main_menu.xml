@@ -9,7 +9,8 @@
     android:background="@drawable/felhocske"
     android:weightSum="10"
     tools:context=".MainMenuActivity"
-    tools:openDrawer="start">
+
+    >
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -56,10 +57,10 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
                     android:layout_gravity="center_horizontal"
-                    android:src="@drawable/napteszt" />
+                    android:src="@drawable/breakfast1" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

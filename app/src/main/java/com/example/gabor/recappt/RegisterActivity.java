@@ -48,9 +48,8 @@ public class RegisterActivity extends AppCompatActivity {
                     Toast.makeText(RegisterActivity.this,"Field can not be empty!",Toast.LENGTH_SHORT).show();
                     return;
                 }
-                else{
-                    if(password.equals(confirm_password))
-                    {
+                else if(password.equals(confirm_password)){
+
 
                         long val = db.addUser(user,password,fullname,email);
                         if (val > 0)
@@ -58,16 +57,15 @@ public class RegisterActivity extends AppCompatActivity {
                             Intent moveToLogin = new Intent(RegisterActivity.this,MainActivity.class);
                             startActivity(moveToLogin);}
                         else {
-                            Toast.makeText(RegisterActivity.this,"User alredy exists!",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RegisterActivity.this,"Username or Email alredy in use!",Toast.LENGTH_SHORT).show();
                         }
 
                     }
-                    else
-                    {
-                        Toast.makeText(RegisterActivity.this,"Passwords must be the same!",Toast.LENGTH_SHORT).show();
-                    }
-                }
 
+                else if(password !=confirm_password) {
+                    Toast.makeText(RegisterActivity.this, "Passwords must be the same!", Toast.LENGTH_SHORT).show();
+                }
+                else { Toast.makeText(RegisterActivity.this, "Email alredy in use!", Toast.LENGTH_SHORT).show();}
 
 
 

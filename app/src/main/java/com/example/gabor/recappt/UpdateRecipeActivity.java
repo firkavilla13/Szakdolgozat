@@ -42,6 +42,7 @@ public class UpdateRecipeActivity extends AppCompatActivity {
     String recipeTime;
     String recipeIngredients;
     String recipeSteps;
+    String ide;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +50,7 @@ public class UpdateRecipeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_update_recipe);
         initBunde();
         init();
+        ide = Integer.toString(id);
 
 
 
@@ -149,12 +151,23 @@ public class UpdateRecipeActivity extends AppCompatActivity {
                     if (recipeName.matches("") || recipeCategory.matches("") || recipeTime.matches("") || recipeIngredients.matches("") || recipeSteps.matches("")) {
                         Toast.makeText(UpdateRecipeActivity.this, "Field can not be empty!", Toast.LENGTH_SHORT).show();
                     } else {
-                        long val = db.addRecipe(recipeName, recipeCategory, recipeTime, recipeIngredients, recipeSteps, recipeUser, getBytes(recipePicture));
+                        boolean val = db.updateRecipe(ide, recipeName, recipeCategory, recipeTime, recipeIngredients, recipeSteps , getBytes(recipePicture));
 
-                        if (val > 0) {
-                            Toast.makeText(UpdateRecipeActivity.this, "New Recipe Added!", Toast.LENGTH_SHORT).show();
-                            Intent moveToLogin = new Intent(UpdateRecipeActivity.this, MainMenuActivity.class);
-                            startActivity(moveToLogin);
+                        if (val==true) {
+                            Toast.makeText(UpdateRecipeActivity.this, "Recipe Updated!", Toast.LENGTH_SHORT).show();
+
+                            Bundle bundle = new Bundle();
+                            bundle.putString("recipeName", recipeName);
+                            bundle.putString("recipeCategory", recipeCategory);
+                            bundle.putString("recipeTime", recipeTime);
+                            bundle.putString("recipeIngredients", recipeIngredients);
+                            bundle.putString("recipeSteps", recipeSteps);
+                            bundle.putInt("id",id);
+                            bundle.putParcelable("recipePicture", recipePicture);
+
+                            Intent intent = new Intent(UpdateRecipeActivity.this, RecipeItemActivity.class);
+                            intent.putExtras(bundle);
+                            startActivity(intent);
                         } else {
                             Toast.makeText(UpdateRecipeActivity.this, "Something went wrong!", Toast.LENGTH_SHORT).show();
                         }
@@ -162,9 +175,18 @@ public class UpdateRecipeActivity extends AppCompatActivity {
                 }
                 break;
             case android.R.id.home:
-                Intent intent = new Intent(UpdateRecipeActivity.this, BreakfastActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("recipeName", recipeName);
+                bundle.putString("recipeCategory", recipeCategory);
+                bundle.putString("recipeTime", recipeTime);
+                bundle.putString("recipeIngredients", recipeIngredients);
+                bundle.putString("recipeSteps", recipeSteps);
+                bundle.putInt("id",id);
+                bundle.putParcelable("recipePicture", recipePicture);
+
+                Intent intent = new Intent(UpdateRecipeActivity.this, RecipeItemActivity.class);
+                intent.putExtras(bundle);
                 startActivity(intent);
-                finish();
                 break;
         }
         return super.onOptionsItemSelected(item);
