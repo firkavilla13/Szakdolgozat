@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -51,12 +52,14 @@ public class RecipeItemActivity extends AppCompatActivity {
         initBunde();
         getSupportActionBar().setTitle(recipeName);
 
+
         textRecipeItemNameDb.setText(recipeName);
         textRecipeItemCategoryDb.setText(recipeCategory);
         textRecipeItemTimeDb.setText(recipeTime);
         textRecipeItemIngredientsDb.setText(recipeIngredients);
         textRecipeItemStepsDb.setText(recipeSteps);
         String ide = Integer.toString(id);
+
         textRecipeID.setText(ide);
         imageViewRecipeItemPicture.setImageBitmap(recipePicture);
 
@@ -65,11 +68,12 @@ public class RecipeItemActivity extends AppCompatActivity {
     public void init(){
 
         toolbarRecipeItem = (Toolbar) findViewById(R.id.recipeItem_toolbar);
-        toolbarRecipeItem.setLogo(R.drawable.napteszt);
+        toolbarRecipeItem.setLogo(R.drawable.recipes2);
         setSupportActionBar(toolbarRecipeItem);
-
-
+        toolbarRecipeItem.setBackgroundColor(Color.YELLOW);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Ez hozza be a vissz agombot
+
         textRecipeID = (TextView)findViewById(R.id.textView_recipeID);
         textRecipeItemName = (TextView) findViewById(R.id.textView_recipeItemName);
         textRecipeItemNameDb = (TextView) findViewById(R.id.textView_recipeItemNameDb);

@@ -107,7 +107,7 @@ public class BreakfastActivity extends AppCompatActivity {
 
         //init toolbar
         newRecipeToolbar = (Toolbar) findViewById(R.id.recipeCategory_toolbar);
-        newRecipeToolbar.setLogo(R.drawable.napteszt);
+        newRecipeToolbar.setLogo(R.drawable.recipes2);
         setSupportActionBar(newRecipeToolbar);
         newRecipeToolbar.setBackgroundColor(Color.YELLOW);
         getSupportActionBar().setTitle(category);

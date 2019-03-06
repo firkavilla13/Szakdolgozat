@@ -17,20 +17,50 @@
         android:layout_marginTop="20dp"
         app:srcCompat="@drawable/napocska"/>
 
-    <EditText
-        android:id="@+id/editText_username"
-        android:layout_width="180dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="23dp"
-        android:background="#ffffff"
-        android:hint="@string/string_username"/>
-    <EditText
-        android:id="@+id/editText_password"
-        android:layout_width="180dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="20dp"
-        android:background="#ffffff"
-        android:hint="@string/string_password"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp">
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/username"
+            android:layout_marginRight="10dp"/>
+
+        <EditText
+            android:id="@+id/editText_username"
+            android:layout_width="180dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="23dp"
+            android:background="#ffffff"
+            android:hint="@string/string_username"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:src="@drawable/pw"
+            android:layout_marginRight="10dp"/>
+
+        <EditText
+            android:id="@+id/editText_password"
+            android:layout_width="180dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="20dp"
+            android:background="#ffffff"
+            android:hint="@string/string_password"/>
+
+
+    </LinearLayout>
+
+
     <Button
         android:id="@+id/button_login"
         android:layout_width="180dp"

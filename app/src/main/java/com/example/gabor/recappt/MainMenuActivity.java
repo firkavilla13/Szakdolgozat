@@ -24,7 +24,7 @@ public class MainMenuActivity extends AppCompatActivity implements NavigationVie
 
 
 
-    //Új szédszedni ,hogy a főmenu is egy fragment legyen és akkor abba tenni bele a grid view-s szart ne fordítva
+
 
     private DrawerLayout drawer;
     GridLayout mainGrid;
@@ -93,11 +93,13 @@ public class MainMenuActivity extends AppCompatActivity implements NavigationVie
                 Toast.makeText(this, "Log out", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_recipe:
-                Intent h = new Intent(MainMenuActivity.this,NewRecipeActivity.class);
-                startActivity(h);
+                Intent newrecipe = new Intent(MainMenuActivity.this,NewRecipeActivity.class);
+                startActivity(newrecipe);
                 break;
             case R.id.nav_logout:
-                Toast.makeText(this, "Log out", Toast.LENGTH_SHORT).show();
+                Intent logout = new Intent(MainMenuActivity.this,MainActivity.class);
+                startActivity(logout);
+                Toast.makeText(this, "Logged out", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_fomenu:
                 Toast.makeText(this, "Log out", Toast.LENGTH_SHORT).show();

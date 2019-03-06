@@ -41,8 +41,8 @@ public class NewRecipeActivity extends AppCompatActivity {
     DatabaseHelper db;
     Bitmap recipePicture;
     Bitmap defaultPicture;
-    public static final int PICK_IMAGE = 0;
-    public static final int IMAGE_CAPTURE = 1;
+  //  public static final int PICK_IMAGE = 0;
+  //  public static final int IMAGE_CAPTURE = 1;
 
 
     @Override
@@ -59,7 +59,7 @@ public class NewRecipeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent takePicture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(takePicture,IMAGE_CAPTURE);
+                startActivityForResult(takePicture,0);
             }
         });
        /* Valamiért galériából nem tudom lementeni normálisan, túl nagy a fájl akármit csinálok
@@ -88,7 +88,7 @@ public class NewRecipeActivity extends AppCompatActivity {
 
         newRecipeToolbar = (Toolbar) findViewById(R.id.newRecipe_toolbar);
         spinnerCategory=(Spinner)findViewById(R.id.spinner_recipeCategory);
-        newRecipeToolbar.setLogo(R.drawable.napteszt);
+        newRecipeToolbar.setLogo(R.drawable.recipes2);
         setSupportActionBar(newRecipeToolbar);
         getSupportActionBar().setTitle("New Recipe");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);  //Ez hozza be a vissza gombot
@@ -102,37 +102,21 @@ public class NewRecipeActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode,resultCode,data);
+        super.onActivityResult(requestCode, resultCode, data);
+        recipePicture = (Bitmap)data.getExtras().get("data");
+        imageViewCamera.setImageBitmap(recipePicture);
+        if (requestCode == requestCode && resultCode == RESULT_OK) {
+            super.onActivityResult(requestCode, resultCode, data);
+            recipePicture = (Bitmap) data.getExtras().get("data");
+            imageViewCamera.setImageBitmap(recipePicture);
+        }
 
-          if (requestCode == IMAGE_CAPTURE){
-                 if (resultCode == RESULT_OK) {
-
-                     recipePicture = (Bitmap) data.getExtras().get("data");
-                     imageViewCamera.setImageBitmap(recipePicture);
-                 }
-         }
-       else if (requestCode == PICK_IMAGE) {
-            if (resultCode == RESULT_OK) {
-
-                try {
-                    final Uri uri = data.getData();
-                    final InputStream imageStream = getContentResolver().openInputStream(uri);
-                    recipePicture = BitmapFactory.decodeStream(imageStream);
-
-                    imageViewCamera.setImageBitmap(recipePicture);
-
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-
-    }}
+    }
 
     public static byte[] getBytes(Bitmap recipePicture) {
 
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        recipePicture.compress(Bitmap.CompressFormat.PNG, 50, stream);
+        recipePicture.compress(Bitmap.CompressFormat.PNG, 99, stream);
         return stream.toByteArray();
     }
 

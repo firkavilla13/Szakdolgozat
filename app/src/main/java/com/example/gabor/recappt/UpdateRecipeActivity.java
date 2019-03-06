@@ -81,7 +81,7 @@ public class UpdateRecipeActivity extends AppCompatActivity {
 
         newRecipeToolbar = (Toolbar) findViewById(R.id.newRecipe_toolbar);
         spinnerCategory=(Spinner)findViewById(R.id.spinner_recipeCategory);
-        newRecipeToolbar.setLogo(R.drawable.napteszt);
+        newRecipeToolbar.setLogo(R.drawable.recipes2);
         setSupportActionBar(newRecipeToolbar);
         getSupportActionBar().setTitle("Update Recipe");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);  //Ez hozza be a vissza gombot
