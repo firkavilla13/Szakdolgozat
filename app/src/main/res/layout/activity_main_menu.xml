@@ -12,19 +12,19 @@
 
     >
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:paddingTop="0dp"
+            android:paddingBottom="450dp"
             android:paddingLeft="0dp"
-            android:src="@drawable/napocska" />
+            android:src="@drawable/logo2" />
 
-    </RelativeLayout>
+    </LinearLayout>
+
 
     <GridLayout
         android:id="@+id/mainGrid"
@@ -172,7 +172,7 @@
                     android:layout_width="200dp"
                     android:layout_height="130dp"
                     android:layout_gravity="center_horizontal"
-                    android:src="@drawable/napocska" />
+                    android:src="@drawable/dessert" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

@@ -22,17 +22,20 @@
         android:layout_marginBottom="5dp">
 
         <ImageView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="90dp"
+            android:layout_height="70dp"
             android:src="@drawable/username"
-            android:layout_marginRight="10dp"/>
+            android:layout_marginRight="0dp"/>
 
         <EditText
             android:id="@+id/editText_username"
             android:layout_width="180dp"
             android:layout_height="35dp"
-            android:layout_marginTop="5dp"
-            android:background="#ffffff"
+            android:layout_marginLeft="-20dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/edittext"
+            android:padding="5dp"
+            android:gravity="center"
             android:hint="@string/string_username"/>
 
     </LinearLayout>
@@ -41,17 +44,19 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:src="@drawable/pw"
-            android:layout_marginRight="10dp"/>
+            android:layout_marginRight="-10dp"/>
 
         <EditText
             android:id="@+id/editText_password"
             android:layout_width="180dp"
             android:layout_height="35dp"
             android:layout_marginTop="20dp"
-            android:background="#ffffff"
+            android:background="@drawable/edittext"
+            android:padding="5dp"
+            android:gravity="center"
             android:hint="@string/string_password"/>
     </LinearLayout>
 
@@ -60,17 +65,19 @@
       android:layout_height="wrap_content">
 
       <ImageView
-          android:layout_width="60dp"
-          android:layout_height="60dp"
-          android:src="@drawable/key2"
-          android:layout_marginRight="10dp"/>
+          android:layout_width="80dp"
+          android:layout_height="80dp"
+          android:src="@drawable/pw2"
+          android:layout_marginRight="-10dp"/>
 
       <EditText
           android:id="@+id/editText_confirm_password"
           android:layout_width="180dp"
           android:layout_height="35dp"
           android:layout_marginTop="20dp"
-          android:background="#ffffff"
+          android:background="@drawable/edittext"
+          android:padding="5dp"
+          android:gravity="center"
           android:hint="@string/string_confirm_password"/>
 
 
@@ -83,17 +90,19 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:src="@drawable/key2"
-            android:layout_marginRight="10dp"/>
+            android:layout_width="80dp"
+            android:layout_height="70dp"
+            android:src="@drawable/name"
+            android:layout_marginRight="-10dp"/>
 
         <EditText
             android:id="@+id/editTtext_fullname"
             android:layout_width="180dp"
             android:layout_height="35dp"
             android:layout_marginTop="20dp"
-            android:background="#ffffff"
+            android:background="@drawable/edittext"
+            android:padding="5dp"
+            android:gravity="center"
             android:hint="@string/string_full_name"/>
 
 
@@ -104,17 +113,19 @@
        android:layout_height="wrap_content">
 
        <ImageView
-           android:layout_width="60dp"
-           android:layout_height="60dp"
-           android:src="@drawable/key2"
-           android:layout_marginRight="10dp"/>
+           android:layout_width="70dp"
+           android:layout_height="70dp"
+           android:src="@drawable/email"
+           android:layout_marginRight="0dp"/>
 
        <EditText
            android:id="@+id/eddiText_email"
            android:layout_width="180dp"
            android:layout_height="35dp"
            android:layout_marginTop="20dp"
-           android:background="#ffffff"
+           android:background="@drawable/edittext"
+           android:padding="5dp"
+           android:gravity="center"
            android:hint="@string/string_email"/>
 
 
