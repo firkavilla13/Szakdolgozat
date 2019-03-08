@@ -10,6 +10,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.method.ScrollingMovementMethod;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
@@ -62,6 +63,8 @@ public class RecipeItemActivity extends AppCompatActivity {
 
         textRecipeID.setText(ide);
         imageViewRecipeItemPicture.setImageBitmap(recipePicture);
+
+        textRecipeItemIngredientsDb.setMovementMethod(new ScrollingMovementMethod());
 
     }
 

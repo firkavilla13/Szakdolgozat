@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_gravity="center"
+    android:background="@drawable/felhocske"
     tools:context=".RecipeItemActivity">
 
 
@@ -65,6 +66,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
+                android:background="@drawable/edittext"
+                android:padding="10dp"
                 android:text="recipe_name"/>
 
 
@@ -125,9 +128,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:minLines="5"
-                android:maxLines="200"
                 android:scrollbarAlwaysDrawVerticalTrack="true"
-                android:text="recipe_ingredients"/>
+                android:text="recipe_ingredients"
+                android:background="@drawable/edittext"
+                android:padding="10dp"
+                android:scrollbars="horizontal"
+                android:gravity="center"/>
 
             <TextView
                 android:id="@+id/textView_recipeItemSteps"
@@ -138,8 +144,11 @@
                 android:id="@+id/textView_recipeItemStepsDb"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:gravity="center"
                 android:minLines="5"
-                android:text="recipe_steps"/>
+                android:text="recipe_steps"
+                android:background="@drawable/edittext"
+                android:padding="10dp"/>
 
 
         </LinearLayout>
