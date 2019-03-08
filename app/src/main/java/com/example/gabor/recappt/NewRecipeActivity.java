@@ -15,6 +15,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -47,6 +48,8 @@ public class NewRecipeActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_recipe);
 
@@ -144,6 +147,8 @@ public class NewRecipeActivity extends AppCompatActivity {
                     String recipeIngredients = textRecipeIngredients.getText().toString().trim();
                     String recipeSteps = textRecipeSteps.getText().toString().trim();
                     String recipeUser = segedUser.toString().trim();
+
+
 
                     if (recipeName.matches("") || recipeCategory.matches("") || recipeTime.matches("") || recipeIngredients.matches("") || recipeSteps.matches("")) {
                         Toast.makeText(NewRecipeActivity.this, "Field can not be empty!", Toast.LENGTH_SHORT).show();

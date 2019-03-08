@@ -43,32 +43,42 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                Intent registerIntent = new Intent(MainActivity.this, RegisterActivity.class);
                 startActivity(registerIntent);
+                finish();
             }
         });
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String user = editTextUsername.getText().toString().trim();
-
                 String password =  editTextPassword.getText().toString().trim();
+
+                if(editTextUsername.getText().toString().equals("")){
+                    editTextUsername.setError("Username can't be empty!");
+                }
+                if(editTextPassword.getText().toString().equals("")) {
+                    editTextPassword.setError("Password can't be empty!");
+                }
+
                 Boolean res = db.checkUser(user, password);
-                if(res == true)
-                {
-                    SharedPreferences sharedPreferences=getSharedPreferences("MyData", Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor=sharedPreferences.edit();
-                    editor.putString("sharedUsername",user);
-                    editor.commit();
-                    Toast.makeText(MainActivity.this,"Logged in!",Toast.LENGTH_SHORT).show();
-                    Intent MainMenu = new Intent(MainActivity.this,MainMenuActivity.class);
-                    startActivity(MainMenu);
-                    finish();
-                    overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
+
+                  if(res == true)
+                    {
+                        SharedPreferences sharedPreferences=getSharedPreferences("MyData", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor=sharedPreferences.edit();
+                        editor.putString("sharedUsername",user);
+                        editor.commit();
+                        Toast.makeText(MainActivity.this,"Logged in!",Toast.LENGTH_SHORT).show();
+                        Intent MainMenu = new Intent(MainActivity.this,MainMenuActivity.class);
+                        startActivity(MainMenu);
+                        finish();
+                        overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
+                    }
+
+                    else if (res == false)
+                    {
+                        Toast.makeText(MainActivity.this,"Invalid username or password!",Toast.LENGTH_SHORT).show();
+                    }
                 }
-                else
-                {
-                    Toast.makeText(MainActivity.this,"Invalid username or password!",Toast.LENGTH_SHORT).show();
-                }
-            }
         });
 
 
@@ -81,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
         editTextPassword = (EditText)findViewById(R.id.editText_password);
         buttonLogin = (Button)findViewById(R.id.button_login);
         textViewRegister = (TextView) findViewById(R.id.textView_register);
-        sapkaAnim = AnimationUtils.loadAnimation(MainActivity.this,R.anim.sapka_anim);
+        sapkaAnim = AnimationUtils.loadAnimation(MainActivity.this,R.anim.bouncing);
         sapkaImageView =(ImageView)findViewById(R.id.imageView_logosapka);
     }
 }

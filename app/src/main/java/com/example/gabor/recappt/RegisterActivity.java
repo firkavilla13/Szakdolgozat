@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -22,6 +23,8 @@ public class RegisterActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
@@ -43,6 +46,25 @@ public class RegisterActivity extends AppCompatActivity {
                 String fullname = textFullName.getText().toString().trim();
                 String email = textEmail.getText().toString().trim();
 
+                if(user.equals("")){
+                    textUsername.setError("Username is missing!");
+                }
+                if(password.equals("")){
+                    textPassword.setError("Password is missing!");
+                }
+                if(confirm_password.equals("")){
+                    textConfirmPassword.setError("Confirm Password is missing!");
+                }
+                if(!confirm_password.equals(password)){
+                    textConfirmPassword.setError("Passwords must be the same !");
+                }
+                if(fullname.equals("")){
+                    textFullName.setError("Name is missing!");
+                }
+                if(email.equals("")){
+                    textEmail.setError("E-mail is missing!");
+                }
+
                 if(user.matches("")||password.matches("")||fullname.matches("")||email.matches(""))
                 {
                     Toast.makeText(RegisterActivity.this,"Field can not be empty!",Toast.LENGTH_SHORT).show();
@@ -62,9 +84,6 @@ public class RegisterActivity extends AppCompatActivity {
 
                     }
 
-                else if(password !=confirm_password) {
-                    Toast.makeText(RegisterActivity.this, "Passwords must be the same!", Toast.LENGTH_SHORT).show();
-                }
                 else { Toast.makeText(RegisterActivity.this, "Email alredy in use!", Toast.LENGTH_SHORT).show();}
 
 
@@ -79,7 +98,7 @@ public class RegisterActivity extends AppCompatActivity {
         textUsername = (EditText)findViewById(R.id.editText_username);
         textPassword = (EditText)findViewById(R.id.editText_password);
         textConfirmPassword=(EditText)findViewById(R.id.editText_confirm_password);
-        textFullName=(EditText)findViewById(R.id.editText_username);
+        textFullName=(EditText)findViewById(R.id.editTtext_fullname);
         textEmail=(EditText)findViewById(R.id.eddiText_email);
         buttonRegister = (Button)findViewById(R.id.button_register);
         textViewLogin = (TextView) findViewById(R.id.textView_login);

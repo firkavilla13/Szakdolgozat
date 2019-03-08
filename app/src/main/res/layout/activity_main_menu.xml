@@ -63,12 +63,13 @@
                     android:layout_gravity="center_horizontal"
                     android:src="@drawable/breakfast1" />
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="Breakfast"
                     android:textAlignment="center"
                     android:textColor="@android:color/black"
+                    android:background="@drawable/edittext"
                     android:textSize="18dp"
                     android:textStyle="bold"/>
             </LinearLayout>
@@ -98,14 +99,16 @@
                     android:layout_width="200dp"
                     android:layout_height="130dp"
                     android:layout_gravity="center_horizontal"
+                    android:layout_marginRight="5dp"
                     android:src="@drawable/lunch" />
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="Lunch"
                     android:textAlignment="center"
                     android:textColor="@android:color/black"
+                    android:background="@drawable/edittext"
                     android:textSize="18dp"
                     android:textStyle="bold"/>
             </LinearLayout>
@@ -134,14 +137,16 @@
                 <ImageView
                     android:layout_width="200dp"
                     android:layout_height="130dp"
+                    android:layout_marginRight="5dp"
                     android:layout_gravity="center_horizontal"
                     android:src="@drawable/dinner" />
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="Dinner"
                     android:textAlignment="center"
+                    android:background="@drawable/edittext"
                     android:textColor="@android:color/black"
                     android:textSize="18dp"
                     android:textStyle="bold"/>
@@ -172,14 +177,16 @@
                     android:layout_width="200dp"
                     android:layout_height="130dp"
                     android:layout_gravity="center_horizontal"
+                    android:layout_marginRight="5dp"
                     android:src="@drawable/dessert" />
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="Dessert"
                     android:textAlignment="center"
                     android:textColor="@android:color/black"
+                    android:background="@drawable/edittext"
                     android:textSize="18dp"
                     android:textStyle="bold"/>
             </LinearLayout>
