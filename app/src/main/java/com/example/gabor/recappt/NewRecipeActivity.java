@@ -161,6 +161,7 @@ public class NewRecipeActivity extends AppCompatActivity {
                             Toast.makeText(NewRecipeActivity.this, "New Recipe Added!", Toast.LENGTH_SHORT).show();
                             Intent moveToLogin = new Intent(NewRecipeActivity.this, MainMenuActivity    .class);
                             startActivity(moveToLogin);
+                            finish();
                         } else {
                             Toast.makeText(NewRecipeActivity.this, "Something went wrong!", Toast.LENGTH_SHORT).show();
                         }

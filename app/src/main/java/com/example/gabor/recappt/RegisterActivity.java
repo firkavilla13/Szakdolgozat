@@ -77,7 +77,9 @@ public class RegisterActivity extends AppCompatActivity {
                         if (val > 0)
                         {Toast.makeText(RegisterActivity.this,"Successfull registration!",Toast.LENGTH_SHORT).show();
                             Intent moveToLogin = new Intent(RegisterActivity.this,MainActivity.class);
-                            startActivity(moveToLogin);}
+                            startActivity(moveToLogin);
+                            finish();}
+
                         else {
                             Toast.makeText(RegisterActivity.this,"Username or Email alredy in use!",Toast.LENGTH_SHORT).show();
                         }

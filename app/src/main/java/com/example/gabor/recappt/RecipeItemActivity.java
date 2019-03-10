@@ -132,7 +132,6 @@ public class RecipeItemActivity extends AppCompatActivity {
                 Intent intent = new Intent(RecipeItemActivity.this, BreakfastActivity.class);
                 intent.putExtras(bundle);
                 startActivity(intent);
-                startActivity(intent);
                 finish();
                 break;
 
@@ -162,6 +161,7 @@ public class RecipeItemActivity extends AppCompatActivity {
                         Intent intent = new Intent(RecipeItemActivity.this,BreakfastActivity.class);
                         intent.putExtras(bundle);
                         startActivity(intent);
+                        finish();
                     }
                 });
 

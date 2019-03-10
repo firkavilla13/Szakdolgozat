@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_gravity="center"
-    android:background="@drawable/felhocske"
+    android:background="@mipmap/backgroundggggg"
     tools:context=".RecipeItemActivity">
 
 
@@ -39,8 +39,13 @@
         <ImageView
             android:id="@+id/imageView_recipeItemPicture"
             android:layout_gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="230dp"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:padding="2dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/edittext"
             android:src="@drawable/napocska"
             />
 
@@ -53,7 +58,10 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingTop="10dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp">
 
 
             <TextView
@@ -76,17 +84,23 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingTop="10dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp">
 
             <TextView
                 android:id="@+id/textView_recipeItemCategory"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+
                 android:text="Recipe Category: "/>
             <TextView
                 android:id="@+id/textView_recipeItemCategoryDb"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:background="@drawable/edittext"
                 android:layout_marginRight="10dp"
                 android:text="recipe_category"/>
 
@@ -96,7 +110,10 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingTop="10dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp">
 
             <TextView
                 android:id="@+id/textView_recipeItemTime"
@@ -107,6 +124,8 @@
                 android:id="@+id/textView_recipeItemTimeDb"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:background="@drawable/edittext"
                 android:layout_marginRight="10dp"
                 android:text="recipe_time"/>
 
@@ -114,24 +133,28 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="320dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp">
 
             <TextView
                 android:id="@+id/textView_recipeItemIngredients"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:text="Ingredients: "/>
             <TextView
                 android:id="@+id/textView_recipeItemIngredientsDb"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:minLines="5"
                 android:scrollbarAlwaysDrawVerticalTrack="true"
                 android:text="recipe_ingredients"
                 android:background="@drawable/edittext"
-                android:padding="10dp"
+                android:padding="5dp"
                 android:scrollbars="horizontal"
                 android:gravity="center"/>
 
@@ -139,16 +162,18 @@
                 android:id="@+id/textView_recipeItemSteps"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingTop="10dp"
                 android:text="Steps: "/>
             <TextView
                 android:id="@+id/textView_recipeItemStepsDb"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:minLines="5"
                 android:text="recipe_steps"
                 android:background="@drawable/edittext"
-                android:padding="10dp"/>
+                android:padding="5dp"/>
 
 
         </LinearLayout>

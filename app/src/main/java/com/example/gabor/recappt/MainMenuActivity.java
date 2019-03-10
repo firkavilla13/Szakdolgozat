@@ -98,10 +98,12 @@ public class MainMenuActivity extends AppCompatActivity implements NavigationVie
             case R.id.nav_recipe:
                 Intent newrecipe = new Intent(MainMenuActivity.this,NewRecipeActivity.class);
                 startActivity(newrecipe);
+                finish();
                 break;
             case R.id.nav_logout:
                 Intent logout = new Intent(MainMenuActivity.this,MainActivity.class);
                 startActivity(logout);
+                finish();
                 Toast.makeText(this, "Logged out", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_fomenu:
