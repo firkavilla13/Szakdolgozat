@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:showIn="navigation_view">
+    tools:showIn="navigation_view"
+    >
 
     <group android:checkableBehavior="single">
 
@@ -14,12 +15,8 @@
             android:icon="@drawable/recipes"
             android:title="New Recipe"/>
         <item
-            android:id="@+id/nav_profil"
-            android:icon="@drawable/username"
-            android:title="Profile"/>
-        <item
             android:id="@+id/nav_logout"
-            android:icon="@drawable/ic_kijelentkezes"
+            android:icon="@drawable/username"
             android:title="Log out"/>
 
     </group>

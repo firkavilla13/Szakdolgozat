@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_gravity="center"
-    android:background="@mipmap/backgroundggggg"
+    android:background="@mipmap/newrecipebackground"
     tools:context=".UpdateRecipeActivity">
 
 
@@ -30,13 +30,17 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
-            android:text="Recipe name:" />
+            android:typeface="serif"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:text="Name:" />
 
         <EditText
             android:id="@+id/editText_recipeName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:typeface="serif"
+            android:textStyle="bold"
             android:padding="5dp"
             android:gravity="center"
             android:background="@drawable/edittext"
@@ -59,12 +63,17 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:typeface="serif"
+            android:textColor="@color/white"
+            android:textStyle="bold"
             android:text="Category:" />
 
         <Spinner
             android:id="@+id/spinner_recipeCategory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:typeface="serif"
+            android:textStyle="bold"
             android:layout_centerHorizontal="true"
             android:layout_marginLeft="150px"
             />
@@ -82,13 +91,17 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
+            android:typeface="serif"
+            android:textColor="@color/white"
+            android:textStyle="bold"
             android:text="Time:" />
 
         <EditText
             android:id="@+id/editText_recipeTime"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
+            android:typeface="serif"
+            android:textStyle="bold"
             android:background="@drawable/edittext"
             android:padding="5dp"
             android:gravity="center"
@@ -101,7 +114,9 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
+            android:typeface="serif"
+            android:textColor="@color/white"
+            android:textStyle="bold"
             android:text="Min" />
 
 
@@ -117,6 +132,9 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:typeface="serif"
+            android:textColor="@color/white"
+            android:textStyle="bold"
             android:layout_gravity="center"
             android:text="Ingredients:" />
 
@@ -124,6 +142,8 @@
             android:id="@+id/editText_recipeIngredients"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:typeface="serif"
+            android:textStyle="bold"
             android:background="@drawable/edittext"
             android:padding="10dp"
             android:gravity="center"
@@ -143,6 +163,9 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:typeface="serif"
+            android:textColor="@color/white"
+            android:textStyle="bold"
             android:layout_gravity="center"
             android:text="Steps:"/>
 
@@ -150,6 +173,8 @@
             android:id="@+id/editText_recipeSteps"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:typeface="serif"
+            android:textStyle="bold"
             android:background="@drawable/edittext"
             android:padding="10dp"
             android:gravity="center"
@@ -169,6 +194,8 @@
 
         <Button
             android:id="@+id/button_recipePicture"
+            android:typeface="serif"
+            android:textStyle="bold"
             android:layout_width="100dp"
             android:layout_height="60dp"
             android:layout_marginTop="30dp"

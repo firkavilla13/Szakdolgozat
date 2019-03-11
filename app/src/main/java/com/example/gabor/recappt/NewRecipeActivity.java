@@ -55,13 +55,14 @@ public class NewRecipeActivity extends AppCompatActivity {
 
         init();
 
-        recipePicture =  BitmapFactory.decodeResource(getResources(), R.drawable.nopicture);
+        recipePicture =  BitmapFactory.decodeResource(getResources(), R.mipmap.nopicture);
         imageViewCamera.setImageBitmap(recipePicture);
 
         buttonRecipePicture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent takePicture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                takePicture.putExtra(MediaStore.EXTRA_VIDEO_QUALITY,1);
                 startActivityForResult(takePicture,0);
             }
         });
@@ -119,7 +120,7 @@ public class NewRecipeActivity extends AppCompatActivity {
     public static byte[] getBytes(Bitmap recipePicture) {
 
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        recipePicture.compress(Bitmap.CompressFormat.PNG, 99, stream);
+        recipePicture.compress(Bitmap.CompressFormat.PNG, 0, stream);
         return stream.toByteArray();
     }
 

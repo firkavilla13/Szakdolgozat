@@ -92,18 +92,15 @@ public class MainMenuActivity extends AppCompatActivity implements NavigationVie
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.nav_profil:
-                Toast.makeText(this, "Log out", Toast.LENGTH_SHORT).show();
-                break;
             case R.id.nav_recipe:
                 Intent newrecipe = new Intent(MainMenuActivity.this,NewRecipeActivity.class);
                 startActivity(newrecipe);
-                finish();
+                MainMenuActivity.this.finish();
                 break;
             case R.id.nav_logout:
                 Intent logout = new Intent(MainMenuActivity.this,MainActivity.class);
                 startActivity(logout);
-                finish();
+                MainMenuActivity.this.finish();
                 Toast.makeText(this, "Logged out", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_fomenu:

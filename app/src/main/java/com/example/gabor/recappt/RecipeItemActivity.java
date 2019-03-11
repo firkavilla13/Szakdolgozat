@@ -54,6 +54,7 @@ public class RecipeItemActivity extends AppCompatActivity {
 
         init();
         initBunde();
+        recipePicture = db.getImage(id);
         getSupportActionBar().setTitle(recipeName);
 
 
@@ -73,10 +74,10 @@ public class RecipeItemActivity extends AppCompatActivity {
 
     public void init(){
 
+
         toolbarRecipeItem = (Toolbar) findViewById(R.id.recipeItem_toolbar);
         toolbarRecipeItem.setLogo(R.drawable.recipes2);
         setSupportActionBar(toolbarRecipeItem);
-        toolbarRecipeItem.setBackgroundColor(Color.YELLOW);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Ez hozza be a vissz agombot
 
@@ -99,6 +100,7 @@ public class RecipeItemActivity extends AppCompatActivity {
 
     public void initBunde()
     {
+
         Bundle bundle = getIntent().getExtras();
         id = bundle.getInt("id");
         recipeName = bundle.getString("recipeName");
@@ -106,7 +108,7 @@ public class RecipeItemActivity extends AppCompatActivity {
         recipeTime = bundle.getString("recipeTime");
         recipeIngredients = bundle.getString("recipeIngredients");
         recipeSteps = bundle.getString("recipeSteps");
-        recipePicture = getIntent().getExtras().getParcelable("recipePicture");
+       // recipePicture = getIntent().getExtras().getParcelable("recipePicture");
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -132,7 +134,7 @@ public class RecipeItemActivity extends AppCompatActivity {
                 Intent intent = new Intent(RecipeItemActivity.this, BreakfastActivity.class);
                 intent.putExtras(bundle);
                 startActivity(intent);
-                finish();
+                this.finish();
                 break;
 
             case R.id.action_delete:
@@ -149,9 +151,7 @@ public class RecipeItemActivity extends AppCompatActivity {
                         // Do nothing but close the dialog
 
                         db.delete(id);
-                        Intent intent2 = new Intent(RecipeItemActivity.this, BreakfastActivity.class);
-                        startActivity(intent2);
-                        finish();
+
                         Toast.makeText(RecipeItemActivity.this, recipeName+" is deleted !", Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
 
@@ -161,7 +161,7 @@ public class RecipeItemActivity extends AppCompatActivity {
                         Intent intent = new Intent(RecipeItemActivity.this,BreakfastActivity.class);
                         intent.putExtras(bundle);
                         startActivity(intent);
-                        finish();
+                        RecipeItemActivity.this.finish();
                     }
                 });
 

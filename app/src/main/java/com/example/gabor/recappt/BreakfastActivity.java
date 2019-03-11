@@ -151,7 +151,7 @@ public class BreakfastActivity extends AppCompatActivity {
             case android.R.id.home:
                 Intent intent = new Intent(BreakfastActivity.this, MainMenuActivity.class);
                 startActivity(intent);
-                finish();
+                killActivity();
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -161,6 +161,10 @@ public class BreakfastActivity extends AppCompatActivity {
         // suggestList = db.getName();
         // materialSearchBar.setLastSuggestions(suggestList);
 
+    }
+    private void killActivity()
+    {
+        finish();
     }
 
 }

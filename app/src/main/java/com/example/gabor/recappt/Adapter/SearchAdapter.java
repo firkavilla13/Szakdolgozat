@@ -107,9 +107,9 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchViewHolder>{
 
 
         Bitmap kep = db.getImage(recipes.get(position).getId());
-        holder.recipeName.setText(recipes.get(position).getName());
-        holder.recipeCategory.setText(recipes.get(position).getCategory());
-        holder.recipeTime.setText(recipes.get(position).getTime());
+        holder.recipeName.setText("Name: "+recipes.get(position).getName());
+        holder.recipeCategory.setText("Category: "+recipes.get(position).getCategory());
+        holder.recipeTime.setText("Time: "+ recipes.get(position).getTime()+" Min");
         //holder.recipePicture.setImageBitmap(bytekep);
         holder.recipePicture.setImageBitmap(kep);
 
@@ -128,7 +128,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchViewHolder>{
                     bundle.putString("recipeIngredients", recipes.get(position).getIngredients());
                     bundle.putString("recipeSteps", recipes.get(position).getSteps());
                     bundle.putInt("id",recipes.get(position).getId());
-                    bundle.putParcelable("recipePicture", db.getImage(recipes.get(position).getId()));
+                    //bundle.putParcelable("recipePicture", db.getImage(recipes.get(position).getId()));
 
                     intent.putExtras(bundle);
                     view.getContext().startActivity(intent);

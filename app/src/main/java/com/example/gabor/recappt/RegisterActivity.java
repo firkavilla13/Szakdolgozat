@@ -6,8 +6,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +22,8 @@ public class RegisterActivity extends AppCompatActivity {
     EditText textEmail;
     Button buttonRegister;
     TextView textViewLogin;
+    Animation ufoAnim;
+    ImageView ufoImageView;
     DatabaseHelper db;
 
     @Override
@@ -29,6 +34,7 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         init();
+        ufoImageView.startAnimation(ufoAnim);
 
         textViewLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,6 +110,8 @@ public class RegisterActivity extends AppCompatActivity {
         textEmail=(EditText)findViewById(R.id.eddiText_email);
         buttonRegister = (Button)findViewById(R.id.button_register);
         textViewLogin = (TextView) findViewById(R.id.textView_login);
+        ufoAnim = AnimationUtils.loadAnimation(RegisterActivity.this,R.anim.ufo_anim);
+        ufoImageView =(ImageView)findViewById(R.id.imageView_ufo);
     }
 
 }

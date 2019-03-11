@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_gravity="center"
-    android:background="@mipmap/backgroundggggg"
+    android:background="@mipmap/recipeitembackground"
     tools:context=".RecipeItemActivity">
 
 
@@ -39,12 +39,13 @@
         <ImageView
             android:id="@+id/imageView_recipeItemPicture"
             android:layout_gravity="center"
-            android:layout_width="250dp"
-            android:layout_height="250dp"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
             android:padding="2dp"
             android:layout_marginRight="40dp"
             android:layout_marginLeft="40dp"
             android:layout_marginTop="20dp"
+
             android:background="@drawable/edittext"
             android:src="@drawable/napocska"
             />
@@ -68,11 +69,16 @@
                 android:id="@+id/textView_recipeItemName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Recipe name: "/>
+                android:typeface="serif"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:text="Name: "/>
             <TextView
                 android:id="@+id/textView_recipeItemNameDb"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:typeface="serif"
+                android:textStyle="bold"
                 android:layout_marginRight="10dp"
                 android:background="@drawable/edittext"
                 android:padding="10dp"
@@ -93,12 +99,16 @@
                 android:id="@+id/textView_recipeItemCategory"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
-                android:text="Recipe Category: "/>
+                android:typeface="serif"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:text="Category: "/>
             <TextView
                 android:id="@+id/textView_recipeItemCategoryDb"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:typeface="serif"
+                android:textStyle="bold"
                 android:padding="5dp"
                 android:background="@drawable/edittext"
                 android:layout_marginRight="10dp"
@@ -119,12 +129,18 @@
                 android:id="@+id/textView_recipeItemTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:typeface="serif"
+                android:textColor="@color/white"
+                android:textStyle="bold"
                 android:text="Time: "/>
             <TextView
                 android:id="@+id/textView_recipeItemTimeDb"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:typeface="serif"
+                android:textStyle="bold"
                 android:padding="5dp"
+
                 android:background="@drawable/edittext"
                 android:layout_marginRight="10dp"
                 android:text="recipe_time"/>
@@ -144,12 +160,17 @@
                 android:id="@+id/textView_recipeItemIngredients"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:typeface="serif"
+                android:textColor="@color/white"
+                android:textStyle="bold"
                 android:layout_gravity="center"
                 android:text="Ingredients: "/>
             <TextView
                 android:id="@+id/textView_recipeItemIngredientsDb"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:typeface="serif"
+                android:textStyle="bold"
                 android:minLines="5"
                 android:scrollbarAlwaysDrawVerticalTrack="true"
                 android:text="recipe_ingredients"
@@ -162,6 +183,9 @@
                 android:id="@+id/textView_recipeItemSteps"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:typeface="serif"
+                android:textColor="@color/white"
+                android:textStyle="bold"
                 android:layout_gravity="center"
                 android:paddingTop="10dp"
                 android:text="Steps: "/>
@@ -169,6 +193,8 @@
                 android:id="@+id/textView_recipeItemStepsDb"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:typeface="serif"
+                android:textStyle="bold"
                 android:gravity="center"
                 android:minLines="5"
                 android:text="recipe_steps"
