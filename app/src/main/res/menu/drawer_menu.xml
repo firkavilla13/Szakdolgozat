@@ -8,15 +8,15 @@
 
         <item
             android:id="@+id/nav_fomenu"
-            android:icon="@drawable/dinner"
+            android:icon="@mipmap/dinner"
             android:title="All Recipes"/>
         <item
             android:id="@+id/nav_recipe"
-            android:icon="@drawable/recipes"
+            android:icon="@mipmap/recipes"
             android:title="New Recipe"/>
         <item
             android:id="@+id/nav_logout"
-            android:icon="@drawable/username"
+            android:icon="@mipmap/username"
             android:title="Log out"/>
 
     </group>

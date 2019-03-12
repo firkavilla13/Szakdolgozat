@@ -57,6 +57,7 @@ public class UpdateRecipeActivity extends AppCompatActivity {
 
 
 
+        recipePicture = db.getImage(id);
         imageViewCamera.setImageBitmap(recipePicture);
 
         textRecipeName.setText(recipeName);
@@ -105,7 +106,7 @@ public class UpdateRecipeActivity extends AppCompatActivity {
         recipeTime = bundle.getString("recipeTime");
         recipeIngredients = bundle.getString("recipeIngredients");
         recipeSteps = bundle.getString("recipeSteps");
-        recipePicture = getIntent().getExtras().getParcelable("recipePicture");
+        //recipePicture = getIntent().getExtras().getParcelable("recipePicture");
     }
 
     @Override
@@ -171,6 +172,7 @@ public class UpdateRecipeActivity extends AppCompatActivity {
                             Intent intent = new Intent(UpdateRecipeActivity.this, RecipeItemActivity.class);
                             intent.putExtras(bundle);
                             startActivity(intent);
+                            finish();
                         } else {
                             Toast.makeText(UpdateRecipeActivity.this, "Something went wrong!", Toast.LENGTH_SHORT).show();
                         }
@@ -185,7 +187,7 @@ public class UpdateRecipeActivity extends AppCompatActivity {
                 bundle.putString("recipeIngredients", recipeIngredients);
                 bundle.putString("recipeSteps", recipeSteps);
                 bundle.putInt("id",id);
-                bundle.putParcelable("recipePicture", recipePicture);
+                //bundle.putParcelable("recipePicture", recipePicture);
 
                 Intent intent = new Intent(UpdateRecipeActivity.this, RecipeItemActivity.class);
                 intent.putExtras(bundle);

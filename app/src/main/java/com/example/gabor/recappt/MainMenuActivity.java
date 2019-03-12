@@ -33,6 +33,7 @@ public class MainMenuActivity extends AppCompatActivity implements NavigationVie
     DatabaseHelper db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
@@ -95,12 +96,12 @@ public class MainMenuActivity extends AppCompatActivity implements NavigationVie
             case R.id.nav_recipe:
                 Intent newrecipe = new Intent(MainMenuActivity.this,NewRecipeActivity.class);
                 startActivity(newrecipe);
-                MainMenuActivity.this.finish();
+                finish();
                 break;
             case R.id.nav_logout:
                 Intent logout = new Intent(MainMenuActivity.this,MainActivity.class);
                 startActivity(logout);
-                MainMenuActivity.this.finish();
+                finish();
                 Toast.makeText(this, "Logged out", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_fomenu:
@@ -133,6 +134,7 @@ public class MainMenuActivity extends AppCompatActivity implements NavigationVie
                         Intent intent = new Intent(MainMenuActivity.this,BreakfastActivity.class);
                         intent.putExtras(bundle);
                         startActivity(intent);
+                        finish();
 
                     }
                     else if(finalI==1)
@@ -143,6 +145,7 @@ public class MainMenuActivity extends AppCompatActivity implements NavigationVie
                         Intent intent = new Intent(MainMenuActivity.this,BreakfastActivity.class);
                         intent.putExtras(bundle);
                         startActivity(intent);
+                        finish();
                     }
                     else if(finalI==2)
                     {
@@ -152,6 +155,7 @@ public class MainMenuActivity extends AppCompatActivity implements NavigationVie
                         Intent intent = new Intent(MainMenuActivity.this,BreakfastActivity.class);
                         intent.putExtras(bundle);
                         startActivity(intent);
+                        finish();
                     }
                     else if(finalI==3)
                     {
@@ -161,6 +165,7 @@ public class MainMenuActivity extends AppCompatActivity implements NavigationVie
                         Intent intent = new Intent(MainMenuActivity.this,BreakfastActivity.class);
                         intent.putExtras(bundle);
                         startActivity(intent);
+                        finish();
                     }
                     else{
                         Toast.makeText(MainMenuActivity.this, "Fail", Toast.LENGTH_SHORT).show();

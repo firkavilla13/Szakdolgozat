@@ -151,7 +151,7 @@ public class BreakfastActivity extends AppCompatActivity {
             case android.R.id.home:
                 Intent intent = new Intent(BreakfastActivity.this, MainMenuActivity.class);
                 startActivity(intent);
-                killActivity();
+                finish();
                 break;
         }
         return super.onOptionsItemSelected(item);

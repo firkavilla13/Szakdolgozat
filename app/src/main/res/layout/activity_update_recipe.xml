@@ -205,11 +205,16 @@
 
 
         <ImageView
-            android:id="@+id/imageView_cameraPicture"
-            android:layout_width="150dp"
-            android:layout_height="100dp"
-            android:layout_marginLeft="120dp"
-            android:orientation="horizontal" />
+        android:id="@+id/imageView_cameraPicture"
+        android:layout_width="200dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="140dp"
+        android:layout_marginBottom="10dp"
+
+        android:padding="6dp"
+        android:background="@drawable/pictureframe"
+        android:orientation="horizontal" />
 
 
     </RelativeLayout>

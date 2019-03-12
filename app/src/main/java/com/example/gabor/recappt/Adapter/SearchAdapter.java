@@ -1,5 +1,6 @@
 package com.example.gabor.recappt.Adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -132,6 +133,8 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchViewHolder>{
 
                     intent.putExtras(bundle);
                     view.getContext().startActivity(intent);
+                    ((Activity)context).finish();
+
                 }
 
                 else

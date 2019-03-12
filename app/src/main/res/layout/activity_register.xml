@@ -46,7 +46,7 @@
         <ImageView
             android:layout_width="90dp"
             android:layout_height="70dp"
-            android:src="@drawable/username"
+            android:src="@mipmap/username"
             android:layout_marginRight="0dp"/>
 
         <EditText
@@ -72,7 +72,7 @@
         <ImageView
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:src="@drawable/pw"
+            android:src="@mipmap/pw"
             android:layout_marginRight="-10dp"/>
 
         <EditText
@@ -97,7 +97,7 @@
       <ImageView
           android:layout_width="80dp"
           android:layout_height="80dp"
-          android:src="@drawable/pw2"
+          android:src="@mipmap/pw2"
           android:layout_marginRight="-10dp"/>
 
       <EditText
@@ -152,7 +152,7 @@
        <ImageView
            android:layout_width="70dp"
            android:layout_height="70dp"
-           android:src="@drawable/email"
+           android:src="@mipmap/email"
            android:layout_marginRight="0dp"/>
 
        <EditText

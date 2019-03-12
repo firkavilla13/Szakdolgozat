@@ -1,5 +1,6 @@
 package com.example.gabor.recappt;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -134,7 +135,7 @@ public class RecipeItemActivity extends AppCompatActivity {
                 Intent intent = new Intent(RecipeItemActivity.this, BreakfastActivity.class);
                 intent.putExtras(bundle);
                 startActivity(intent);
-                this.finish();
+                finish();
                 break;
 
             case R.id.action_delete:
@@ -161,7 +162,7 @@ public class RecipeItemActivity extends AppCompatActivity {
                         Intent intent = new Intent(RecipeItemActivity.this,BreakfastActivity.class);
                         intent.putExtras(bundle);
                         startActivity(intent);
-                        RecipeItemActivity.this.finish();
+                        finish();
                     }
                 });
 
@@ -192,7 +193,7 @@ public class RecipeItemActivity extends AppCompatActivity {
                 bundle.putString("recipeIngredients", recipeIngredients);
                 bundle.putString("recipeSteps", recipeSteps);
                 bundle.putInt("id",id);
-                bundle.putParcelable("recipePicture", recipePicture);
+               // bundle.putParcelable("recipePicture", recipePicture);
 
                 Intent intent3 = new Intent(RecipeItemActivity.this, UpdateRecipeActivity.class);
                 intent3.putExtras(bundle);

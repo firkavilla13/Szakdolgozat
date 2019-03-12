@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this,"Logged in!",Toast.LENGTH_SHORT).show();
                         Intent MainMenu = new Intent(MainActivity.this,MainMenuActivity.class);
                         startActivity(MainMenu);
-                        MainActivity.this.finish();
+                        finish();
                         overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
                     }
 
