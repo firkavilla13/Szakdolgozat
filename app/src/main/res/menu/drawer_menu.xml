@@ -2,21 +2,23 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view"
+
     >
+
 
     <group android:checkableBehavior="single">
 
         <item
             android:id="@+id/nav_fomenu"
-            android:icon="@mipmap/dinner"
+            android:icon="@mipmap/all"
             android:title="All Recipes"/>
         <item
             android:id="@+id/nav_recipe"
-            android:icon="@mipmap/recipes"
+            android:icon="@mipmap/newrecept"
             android:title="New Recipe"/>
         <item
             android:id="@+id/nav_logout"
-            android:icon="@mipmap/username"
+            android:icon="@mipmap/logout"
             android:title="Log out"/>
 
     </group>

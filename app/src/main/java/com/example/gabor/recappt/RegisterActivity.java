@@ -28,6 +28,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
@@ -41,8 +42,10 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent LoginIntent = new Intent(RegisterActivity.this, MainActivity.class);
                 startActivity(LoginIntent);
+                overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
             }
         });
+
         buttonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,24 +81,19 @@ public class RegisterActivity extends AppCompatActivity {
                 }
                 else if(password.equals(confirm_password)){
 
-
                         long val = db.addUser(user,password,fullname,email);
                         if (val > 0)
                         {Toast.makeText(RegisterActivity.this,"Successfull registration!",Toast.LENGTH_SHORT).show();
                             Intent moveToLogin = new Intent(RegisterActivity.this,MainActivity.class);
                             startActivity(moveToLogin);
-                            finish();}
-
+                            finish();
+                            overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
+                        }
                         else {
                             Toast.makeText(RegisterActivity.this,"Username or Email alredy in use!",Toast.LENGTH_SHORT).show();
                         }
-
                     }
-
                 else { Toast.makeText(RegisterActivity.this, "Email alredy in use!", Toast.LENGTH_SHORT).show();}
-
-
-
             }
         });
     }
@@ -113,5 +111,4 @@ public class RegisterActivity extends AppCompatActivity {
         ufoAnim = AnimationUtils.loadAnimation(RegisterActivity.this,R.anim.ufo_anim);
         ufoImageView =(ImageView)findViewById(R.id.imageView_ufo);
     }
-
 }

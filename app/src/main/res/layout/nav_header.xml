@@ -2,31 +2,32 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:background="@mipmap/profilbackground"
+    android:adjustViewBounds="true"
     android:gravity="bottom"
     android:padding="10dp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark"
-    android:layout_height="190dp">
+    android:layout_height="300dp">
     
-    <ImageView
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:src="@mipmap/profil"/>
+
     <TextView
-        android:id="@+id/textView_nav_fullname"
+        android:id="@+id/textView_nav_welcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="18dp"
-        android:textColor="@color/colorPrimaryDark"
+        android:textSize="35dp"
+        android:typeface="serif"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
         android:paddingTop="8dp"
-        android:text="@string/string_nav_fullname"
+        android:text="Welcome"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
     <TextView
-        android:id="@+id/textView_nav_email"
+        android:id="@+id/textView_nav_user"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="18dp"
-        android:textColor="@color/colorPrimaryDark"
-        android:text="@string/string_nav_email"/>
+        android:typeface="serif"
+        android:textStyle="bold"
+        android:textSize="35dp"
+        android:textColor="#FFFFFF"
+        android:text="Username"/>
 
 </LinearLayout>

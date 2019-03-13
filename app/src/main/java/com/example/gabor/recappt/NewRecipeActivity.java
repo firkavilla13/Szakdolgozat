@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
@@ -16,6 +17,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,6 +26,8 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.airbnb.lottie.LottieAnimationView;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -36,6 +41,7 @@ public class NewRecipeActivity extends AppCompatActivity {
     EditText textRecipeIngredients;
     EditText textRecipeSteps;
     Button buttonRecipePicture;
+   // LottieAnimationView lt_loading_view;
    // Button buttonRecipePictureGallery;
 
     ImageView imageViewCamera;
@@ -57,6 +63,9 @@ public class NewRecipeActivity extends AppCompatActivity {
 
         recipePicture =  BitmapFactory.decodeResource(getResources(), R.mipmap.nopicture);
         imageViewCamera.setImageBitmap(recipePicture);
+
+
+
 
         buttonRecipePicture.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,6 +97,7 @@ public class NewRecipeActivity extends AppCompatActivity {
         buttonRecipePicture = (Button)findViewById(R.id.button_recipePicture);
         imageViewCamera = (ImageView)findViewById(R.id.imageView_cameraPicture);
         //buttonRecipePictureGallery = (Button)findViewById(R.id.button_recipePictureGallery);
+
 
 
         newRecipeToolbar = (Toolbar) findViewById(R.id.newRecipe_toolbar);
@@ -140,6 +150,8 @@ public class NewRecipeActivity extends AppCompatActivity {
             case R.id.action_pipa:
 
 
+
+
                     SharedPreferences sharedPreferences = getSharedPreferences("MyData", Context.MODE_PRIVATE);
                     String segedUser = sharedPreferences.getString("sharedUsername", "Empty");
                     String recipeName = textRecipeName.getText().toString().trim();
@@ -159,10 +171,14 @@ public class NewRecipeActivity extends AppCompatActivity {
 
                         if (val > 0) {
 
+
                             Toast.makeText(NewRecipeActivity.this, "New Recipe Added!", Toast.LENGTH_SHORT).show();
                             Intent moveToLogin = new Intent(NewRecipeActivity.this, MainMenuActivity    .class);
                             startActivity(moveToLogin);
+
                             finish();
+
+                            overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
                         } else {
                             Toast.makeText(NewRecipeActivity.this, "Something went wrong!", Toast.LENGTH_SHORT).show();
                         }
@@ -173,6 +189,7 @@ public class NewRecipeActivity extends AppCompatActivity {
                 Intent intent = new Intent(NewRecipeActivity.this, MainMenuActivity.class);
                 startActivity(intent);
                 finish();
+                overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
                 break;
         }
             return super.onOptionsItemSelected(item);

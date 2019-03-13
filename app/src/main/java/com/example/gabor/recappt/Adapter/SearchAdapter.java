@@ -134,6 +134,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchViewHolder>{
                     intent.putExtras(bundle);
                     view.getContext().startActivity(intent);
                     ((Activity)context).finish();
+                    ((Activity)context).overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
 
                 }
 

@@ -152,6 +152,7 @@ public class BreakfastActivity extends AppCompatActivity {
                 Intent intent = new Intent(BreakfastActivity.this, MainMenuActivity.class);
                 startActivity(intent);
                 finish();
+                overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
                 break;
         }
         return super.onOptionsItemSelected(item);

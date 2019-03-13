@@ -173,6 +173,7 @@ public class UpdateRecipeActivity extends AppCompatActivity {
                             intent.putExtras(bundle);
                             startActivity(intent);
                             finish();
+                            overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
                         } else {
                             Toast.makeText(UpdateRecipeActivity.this, "Something went wrong!", Toast.LENGTH_SHORT).show();
                         }

@@ -19,6 +19,8 @@
 
     </android.support.v7.widget.Toolbar>
 
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -127,6 +129,17 @@
 
 
     </LinearLayout>
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animation_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="-37dp"
+        android:layout_gravity="center"
+        android:padding="20dp"
+
+        />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="160dp"

@@ -27,16 +27,15 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
+        //Ez teszi teljes képernyőssé az alkalmazást, viszont ha fennt picit húzunk a felső sávon, akkor megjeleníti egy pillanatra
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+        WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         init();
-       sapkaImageView.startAnimation(sapkaAnim);
-
-
+        sapkaImageView.startAnimation(sapkaAnim);
 
         textViewRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,8 +43,10 @@ public class MainActivity extends AppCompatActivity {
                Intent registerIntent = new Intent(MainActivity.this, RegisterActivity.class);
                 startActivity(registerIntent);
                 finish();
+                overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
             }
         });
+
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,13 +64,15 @@ public class MainActivity extends AppCompatActivity {
 
                   if(res == true)
                     {
+                        //Így tudom lementeni a felhasználó nevét, ami alapján később tudok lekérni az adatbázisból
                         SharedPreferences sharedPreferences=getSharedPreferences("MyData", Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor=sharedPreferences.edit();
                         editor.putString("sharedUsername",user);
                         editor.commit();
+
                         Toast.makeText(MainActivity.this,"Logged in!",Toast.LENGTH_SHORT).show();
-                        Intent MainMenu = new Intent(MainActivity.this,MainMenuActivity.class);
-                        startActivity(MainMenu);
+                        Intent mainMenuIntent = new Intent(MainActivity.this,MainMenuActivity.class);
+                        startActivity(mainMenuIntent);
                         finish();
                         overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
                     }
@@ -80,8 +83,6 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
         });
-
-
     }
 
     public void init()

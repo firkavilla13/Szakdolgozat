@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.graphics.drawable.Drawable;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -23,15 +24,16 @@ import android.widget.Toolbar;
 
 public class MainMenuActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-
-
-
-
     private DrawerLayout drawer;
     GridLayout mainGrid;
-    TextView navUsername,navEmail;
+    TextView navWelcome,navUser;
     DatabaseHelper db;
+    NavigationView navigationView;
+    ActionBarDrawerToggle toggle;
+    android.support.v7.widget.Toolbar toolbar;
+    View header;
     @Override
+
     protected void onCreate(Bundle savedInstanceState) {
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -40,45 +42,37 @@ public class MainMenuActivity extends AppCompatActivity implements NavigationVie
         setContentView(R.layout.activity_main_menu);
 
         init();
-
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-        navigationView.removeHeaderView(navigationView.getHeaderView(0));
-
-        android.support.v7.widget.Toolbar toolbar = findViewById(R.id.mainMenu_toolbar);
-        setSupportActionBar(toolbar);
+        Drawable icon = getResources().getDrawable(R.mipmap.profilbackground);
+        header.setBackground(icon);
 
         setSingleEvent(mainGrid);
 
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle( this, drawer, toolbar,
+        toggle = new ActionBarDrawerToggle( this, drawer, toolbar,
                 R.string.navigation_drawer_open, R.string.navigation_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-
-
-        View header = navigationView.inflateHeaderView(R.layout.nav_header);
-        navUsername = (TextView)header.findViewById(R.id.textView_nav_fullname);
-        navEmail = (TextView)header.findViewById(R.id.textView_nav_email);
-
         SharedPreferences sharedPreferences=getSharedPreferences("MyData", Context.MODE_PRIVATE);
         String segedUser = sharedPreferences.getString("sharedUsername","Empty");
 
-       // Cursor eredmeny2 = db.getUsername(segedUser); Nem használtam
-
-        navUsername.setText("Welcome");
-        navEmail.setText(segedUser.toString());
-
-
+        navWelcome.setText("Welcome");
+        navUser.setText(segedUser.toString());
     }
 
     public void init()
     {
-
         mainGrid = (GridLayout)findViewById(R.id.mainGrid);
         drawer = findViewById(R.id.drawer_layout);
         db = new DatabaseHelper(this);
+        toolbar = findViewById(R.id.mainMenu_toolbar);
+        setSupportActionBar(toolbar);
+        navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+        navigationView.removeHeaderView(navigationView.getHeaderView(0));
+        header = navigationView.inflateHeaderView(R.layout.nav_header);
 
+        navWelcome = (TextView)header.findViewById(R.id.textView_nav_welcome);
+        navUser = (TextView)header.findViewById(R.id.textView_nav_user);
     }
 
     public void onBackPressed(){
@@ -93,15 +87,18 @@ public class MainMenuActivity extends AppCompatActivity implements NavigationVie
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
+
             case R.id.nav_recipe:
                 Intent newrecipe = new Intent(MainMenuActivity.this,NewRecipeActivity.class);
                 startActivity(newrecipe);
                 finish();
+                overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
                 break;
             case R.id.nav_logout:
                 Intent logout = new Intent(MainMenuActivity.this,MainActivity.class);
                 startActivity(logout);
                 finish();
+                overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
                 Toast.makeText(this, "Logged out", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_fomenu:
@@ -113,9 +110,8 @@ public class MainMenuActivity extends AppCompatActivity implements NavigationVie
         return true;
     }
 
-
-
     private void setSingleEvent(GridLayout mainGrid){
+
         //Minden leszármazottat loopolni
 
         for (int i=0;i<mainGrid.getChildCount();i++)
@@ -127,7 +123,6 @@ public class MainMenuActivity extends AppCompatActivity implements NavigationVie
                 public void onClick(View v) {
                     if(finalI==0)
                     {
-
                         Bundle bundle = new Bundle();
                         String category = "Breakfast";
                         bundle.putString("category", category);
@@ -135,6 +130,7 @@ public class MainMenuActivity extends AppCompatActivity implements NavigationVie
                         intent.putExtras(bundle);
                         startActivity(intent);
                         finish();
+                        overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
 
                     }
                     else if(finalI==1)
@@ -146,6 +142,7 @@ public class MainMenuActivity extends AppCompatActivity implements NavigationVie
                         intent.putExtras(bundle);
                         startActivity(intent);
                         finish();
+                        overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
                     }
                     else if(finalI==2)
                     {
@@ -156,6 +153,7 @@ public class MainMenuActivity extends AppCompatActivity implements NavigationVie
                         intent.putExtras(bundle);
                         startActivity(intent);
                         finish();
+                        overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
                     }
                     else if(finalI==3)
                     {
@@ -166,6 +164,7 @@ public class MainMenuActivity extends AppCompatActivity implements NavigationVie
                         intent.putExtras(bundle);
                         startActivity(intent);
                         finish();
+                        overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
                     }
                     else{
                         Toast.makeText(MainMenuActivity.this, "Fail", Toast.LENGTH_SHORT).show();

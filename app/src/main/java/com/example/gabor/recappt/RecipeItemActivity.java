@@ -136,6 +136,7 @@ public class RecipeItemActivity extends AppCompatActivity {
                 intent.putExtras(bundle);
                 startActivity(intent);
                 finish();
+                overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
                 break;
 
             case R.id.action_delete:
@@ -163,6 +164,7 @@ public class RecipeItemActivity extends AppCompatActivity {
                         intent.putExtras(bundle);
                         startActivity(intent);
                         finish();
+                        overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
                     }
                 });
 
@@ -199,6 +201,7 @@ public class RecipeItemActivity extends AppCompatActivity {
                 intent3.putExtras(bundle);
                 startActivity(intent3);
                 finish();
+                overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
                 break;
 
 

@@ -6,8 +6,8 @@
     <!-- Use your working translate animation here-->
     <translate
         android:duration="6113"
-        android:fromXDelta="-35%p"
-        android:toXDelta="120%p"
+        android:fromXDelta="-35%"
+        android:toXDelta="120%"
         android:repeatCount="infinite"
 
 
