@@ -33,6 +33,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import static android.graphics.Color.YELLOW;
+
 public class NewRecipeActivity extends AppCompatActivity {
     Toolbar newRecipeToolbar;
     Spinner spinnerCategory;
@@ -103,6 +105,7 @@ public class NewRecipeActivity extends AppCompatActivity {
         newRecipeToolbar = (Toolbar) findViewById(R.id.newRecipe_toolbar);
         spinnerCategory=(Spinner)findViewById(R.id.spinner_recipeCategory);
         newRecipeToolbar.setLogo(R.drawable.recipes2);
+        newRecipeToolbar.setBackgroundColor(YELLOW);
         setSupportActionBar(newRecipeToolbar);
         getSupportActionBar().setTitle("New Recipe");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);  //Ez hozza be a vissza gombot

@@ -95,10 +95,9 @@
             android:textColor="@color/white"
             android:textStyle="bold"
             android:text="Time:" />
-
         <EditText
             android:id="@+id/editText_recipeTime"
-            android:layout_width="100dp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:typeface="serif"
             android:textStyle="bold"
@@ -106,10 +105,11 @@
             android:padding="5dp"
             android:gravity="center"
             android:maxLines="1"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="5dp"
             android:inputType="number"
             android:layout_weight="0.50"
-            android:layout_marginLeft="60dp"
-            android:layout_marginRight="60dp"
+
             />
         <TextView
             android:layout_width="wrap_content"
@@ -117,6 +117,7 @@
             android:typeface="serif"
             android:textColor="@color/white"
             android:textStyle="bold"
+            android:layout_marginRight="130dp"
             android:text="Min" />
 
 
@@ -211,8 +212,8 @@
         android:layout_marginTop="10dp"
         android:layout_marginLeft="140dp"
         android:layout_marginBottom="10dp"
-
-        android:padding="6dp"
+            android:scaleType="fitXY"
+        android:padding="3dp"
         android:background="@drawable/pictureframe"
         android:orientation="horizontal" />
 

@@ -25,6 +25,8 @@ import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
 
+import static android.graphics.Color.YELLOW;
+
 public class UpdateRecipeActivity extends AppCompatActivity {
     Toolbar newRecipeToolbar;
     Spinner spinnerCategory;
@@ -86,6 +88,7 @@ public class UpdateRecipeActivity extends AppCompatActivity {
         newRecipeToolbar = (Toolbar) findViewById(R.id.newRecipe_toolbar);
         spinnerCategory=(Spinner)findViewById(R.id.spinner_recipeCategory);
         newRecipeToolbar.setLogo(R.drawable.recipes2);
+        newRecipeToolbar.setBackgroundColor(YELLOW);
         setSupportActionBar(newRecipeToolbar);
         getSupportActionBar().setTitle("Update Recipe");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);  //Ez hozza be a vissza gombot

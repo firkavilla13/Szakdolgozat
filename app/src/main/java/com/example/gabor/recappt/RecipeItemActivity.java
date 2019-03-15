@@ -21,6 +21,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import static android.graphics.Color.YELLOW;
+
 public class RecipeItemActivity extends AppCompatActivity {
 
     TextView textRecipeItemName;
@@ -35,6 +37,7 @@ public class RecipeItemActivity extends AppCompatActivity {
     TextView textRecipeItemStepsDb;
     TextView textRecipeID;
     ImageView imageViewRecipeItemPicture;
+
     int id;
     String recipeName;
     String recipeCategory;
@@ -78,6 +81,7 @@ public class RecipeItemActivity extends AppCompatActivity {
 
         toolbarRecipeItem = (Toolbar) findViewById(R.id.recipeItem_toolbar);
         toolbarRecipeItem.setLogo(R.drawable.recipes2);
+        toolbarRecipeItem.setBackgroundColor(YELLOW);
         setSupportActionBar(toolbarRecipeItem);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //Ez hozza be a vissz agombot
