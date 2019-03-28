@@ -22,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.os.Vibrator;
 
 import java.io.ByteArrayOutputStream;
 
@@ -46,6 +47,7 @@ public class UpdateRecipeActivity extends AppCompatActivity {
     String recipeIngredients;
     String recipeSteps;
     String ide;
+    Vibrator vibrate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,6 +100,7 @@ public class UpdateRecipeActivity extends AppCompatActivity {
         spinnerCategory.setAdapter(adapter);
 
         db = new DatabaseHelper(this);
+        vibrate = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
     }
 
     public void initBunde()
@@ -157,6 +160,7 @@ public class UpdateRecipeActivity extends AppCompatActivity {
 
                     if (recipeName.matches("") || recipeCategory.matches("") || recipeTime.matches("") || recipeIngredients.matches("") || recipeSteps.matches("")) {
                         Toast.makeText(UpdateRecipeActivity.this, "Field can not be empty!", Toast.LENGTH_SHORT).show();
+                        vibrate.vibrate(300);
                     } else {
                         boolean val = db.updateRecipe(ide, recipeName, recipeCategory, recipeTime, recipeIngredients, recipeSteps , getBytes(recipePicture));
 
@@ -178,6 +182,7 @@ public class UpdateRecipeActivity extends AppCompatActivity {
                             finish();
                             overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
                         } else {
+                            vibrate.vibrate(300);
                             Toast.makeText(UpdateRecipeActivity.this, "Something went wrong!", Toast.LENGTH_SHORT).show();
                         }
                     }

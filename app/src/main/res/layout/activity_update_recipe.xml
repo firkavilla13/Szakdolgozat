@@ -74,6 +74,7 @@
             android:layout_height="wrap_content"
             android:typeface="serif"
             android:textStyle="bold"
+            android:background="@drawable/edittext"
             android:layout_centerHorizontal="true"
             android:layout_marginLeft="150px"
             />

@@ -101,8 +101,11 @@ public class MainMenuActivity extends AppCompatActivity implements NavigationVie
                 overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
                 Toast.makeText(this, "Logged out", Toast.LENGTH_SHORT).show();
                 break;
-            case R.id.nav_fomenu:
-                Toast.makeText(this, "Log out", Toast.LENGTH_SHORT).show();
+            case R.id.nav_allrecipes:
+                Intent allrecipe = new Intent(MainMenuActivity.this,AllRecipeActivity.class);
+                startActivity(allrecipe);
+                finish();
+                overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
                 break;
 
         }

@@ -6,8 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity"
     android:orientation="vertical"
-    android:background="@mipmap/backgroundggggg"
-    android:gravity="center_horizontal">
+    android:gravity="center_horizontal"
+    android:background="@mipmap/backgroundggggg">
 
 <RelativeLayout
     android:layout_width="match_parent"

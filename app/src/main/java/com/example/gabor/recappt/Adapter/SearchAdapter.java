@@ -59,6 +59,7 @@ class SearchViewHolder extends RecyclerView.ViewHolder implements View.OnClickLi
         itemClickListener.onClick(v,getAdapterPosition(),false);
     }
 
+
     @Override
     public boolean onLongClick(View v) {
         itemClickListener.onClick(v,getAdapterPosition(),true);
@@ -119,6 +120,13 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchViewHolder>{
             @Override
             public void onClick(View view, int position, boolean isLongClick) {
                 if (isLongClick) {
+
+                    Toast.makeText(context,"    Click: "+recipes.get(position).getId(), Toast.LENGTH_SHORT).show();
+
+                }
+
+                else
+                {
                     Toast.makeText(context, "Long Click: " + recipes.get(position).getName(), Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(view.getContext(), RecipeItemActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
@@ -135,11 +143,8 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchViewHolder>{
                     view.getContext().startActivity(intent);
                     ((Activity)context).finish();
                     ((Activity)context).overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
-
                 }
 
-                else
-                    Toast.makeText(context,"    Click: "+recipes.get(position).getId(), Toast.LENGTH_SHORT).show();
             }
         });
 

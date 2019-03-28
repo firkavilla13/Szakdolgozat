@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
-    public static final String DATABASE_NAME="gabor.db";
+    public static final String DATABASE_NAME="RecAppt.db";
 
     public static final String TABLE_USER="registeruser";
     public static final String USER_ID="ID";
@@ -52,6 +52,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(sqLiteDatabase);
     }
 
+    // Recept módosítása
     public boolean updateRecipe(String recipeId,String recipeName, String recipeCategory, String recipeTime, String recipeIngredients, String recipeSteps, byte [] recipePicture)
     {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -67,6 +68,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return true;
     }
 
+    // Recept felvétele
     public long addRecipe(String recipeName, String recipeCategory, String recipeTime, String recipeIngredients, String recipeSteps, String recipeUser, byte [] recipePicture){
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -82,6 +84,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
         return res;
     }
+    // Felhasználó felvétele az adatbázisba
     public long addUser(String user, String password, String fullname, String email){
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -95,6 +98,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
         return res;
     }
+    // Felasználó ellenőrzése, hogy létezik-e ?
     public boolean checkUser(String username, String password){
         String [] columns = {USER_ID};
         SQLiteDatabase db = getReadableDatabase();
@@ -110,7 +114,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         else
             return false;
     }
-
+    // Kép előhívása az adatbázisból
     public Bitmap getImage (int id)
     {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -124,42 +128,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return bt;
     }
 
-    public List<Recipe> getRecipe(){
-
-        SQLiteDatabase db = getReadableDatabase();
-        SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
-
-        String [] sqlSelect ={"recipe_id","recipe_name","recipe_category","recipe_time","recipe_ingredients","recipe_steps","recipe_picture"};
-        String tableName = "recipes";
-
-        qb.setTables(tableName);
-        Cursor cursor = qb.query(db,sqlSelect,null,null,null,null,null);
-        List<Recipe> result = new ArrayList<>();
-        if (cursor.moveToFirst())
-        {
-            do{
-                Recipe recipe = new Recipe();
-                recipe.setId(cursor.getInt(cursor.getColumnIndex("recipe_id")));
-                recipe.setName(cursor.getString(cursor.getColumnIndex("recipe_name")));
-                recipe.setCategory(cursor.getString(cursor.getColumnIndex("recipe_category")));
-                recipe.setTime(cursor.getString(cursor.getColumnIndex("recipe_time")));
-                recipe.setIngredients(cursor.getString(cursor.getColumnIndex("recipe_ingredients")));
-                recipe.setSteps(cursor.getString(cursor.getColumnIndex("recipe_steps")));
-             //   recipe.setPicture(cursor.getBlob(cursor.getColumnIndex("recipe_picture")));
-
-                result.add(recipe);
-            }while (cursor.moveToNext());
-        }
-        return result;
-    }
-
-    public void delete(int id)
+   // Recept törlése
+    public void deleteRecipe(int id)
     {
         SQLiteDatabase database = this.getWritableDatabase();
         database.delete(TABLE_RECIPE, RECIPE_ID + " = " + id, null);
         database.close();
     }
 
+    // Recept kategória szerinti hívása
     public List<Recipe> getRecipesByCategory(String recipeCategory, String user){
 
         SQLiteDatabase db = getReadableDatabase();
@@ -189,25 +166,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return result;
     }
 
-    public List<String> getName(){
-        SQLiteDatabase db = getReadableDatabase();
-        SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
 
-        String [] sqlSelect ={"recipe_name"};
-        String tableName = "recipes";
 
-        qb.setTables(tableName);
-        Cursor cursor = qb.query(db,sqlSelect,null,null,null,null,null);
-        List<String> result = new ArrayList<>();
-        if (cursor.moveToFirst())
-        {
-            do{
-                result.add(cursor.getString(cursor.getColumnIndex("recipe_name")));
-            }while (cursor.moveToNext());
-        }
-        return result;
-    }
-
+    // Konkrét receptre keresés
     public List<Recipe> getRecipeByName(String recipeName, String recipeCategory){
 
         SQLiteDatabase db = getReadableDatabase();
@@ -217,7 +178,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String tableName = "recipes";
 
         qb.setTables(tableName);
-        Cursor cursor = qb.query(db,sqlSelect,"recipe_name LIKE ? AND recipe_category = ?",new String[]{recipeName,recipeCategory},null,null,null,null);
+        Cursor cursor = qb.query(db,sqlSelect,"recipe_name LIKE ? AND recipe_category = ?",new String[]{"%"+recipeName+"%",recipeCategory},null,null,null,null);
         List<Recipe> result = new ArrayList<>();
         if (cursor.moveToFirst())
         {
@@ -237,23 +198,33 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return result;
     }
 
-    public Cursor viewData(){
-        SQLiteDatabase db = this.getReadableDatabase();
-        String query = "Select * from "+TABLE_RECIPE;
-        Cursor cursor = db.rawQuery(query, null);
+    public List<Recipe> getAllRecipesByUser(String user){
 
-        return cursor;
-    }
+        SQLiteDatabase db = getReadableDatabase();
+        SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
 
+        String [] sqlSelect ={"recipe_id","recipe_name","recipe_category","recipe_time","recipe_ingredients","recipe_steps","recipe_user","recipe_picture"};
+        String tableName = "recipes";
 
+        qb.setTables(tableName);
+        Cursor cursor = qb.query(db,sqlSelect," recipe_user = ?",new String[]{user},null,null,null,null);
+        List<Recipe> result = new ArrayList<>();
+        if (cursor.moveToFirst())
+        {
+            do{
+                Recipe recipe = new Recipe();
+                recipe.setId(cursor.getInt(cursor.getColumnIndex("recipe_id")));
+                recipe.setName(cursor.getString(cursor.getColumnIndex("recipe_name")));
+                recipe.setCategory(cursor.getString(cursor.getColumnIndex("recipe_category")));
+                recipe.setTime(cursor.getString(cursor.getColumnIndex("recipe_time")));
+                recipe.setIngredients(cursor.getString(cursor.getColumnIndex("recipe_ingredients")));
+                recipe.setSteps(cursor.getString(cursor.getColumnIndex("recipe_steps")));
+                //  recipe.setPicture(cursor.getBlob(cursor.getColumnIndex("recipe_picture")));
 
-    public Cursor searchRecipe(String text)
-    {
-        SQLiteDatabase db = this.getReadableDatabase();
-        String query = "Select * from "+TABLE_RECIPE+" WHERE "+RECIPE_NAME+" Like '%"+text+"%'";
-        Cursor cursor = db.rawQuery(query, null);
-
-        return cursor;
+                result.add(recipe);
+            }while (cursor.moveToNext());
+        }
+        return result;
     }
 
     public Cursor getEmail(String username){
@@ -271,6 +242,80 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor res = db.rawQuery("Select * from "+TABLE_USER+" where "+USER_USERNAME+"="+"'username'",null);
         return res;
     }
+
+
+    // Konkrét receptre keresés
+    /*
+    public List<String> getName(){
+        SQLiteDatabase db = getReadableDatabase();
+        SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
+
+        String [] sqlSelect ={"recipe_name"};
+        String tableName = "recipes";
+
+        qb.setTables(tableName);
+        Cursor cursor = qb.query(db,sqlSelect,null,null,null,null,null);
+        List<String> result = new ArrayList<>();
+        if (cursor.moveToFirst())
+        {
+            do{
+                result.add(cursor.getString(cursor.getColumnIndex("recipe_name")));
+            }while (cursor.moveToNext());
+        }
+        return result;
+    }
+    */
+
+
+    //
+   /*public List<Recipe> getRecipe(){
+
+        SQLiteDatabase db = getReadableDatabase();
+        SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
+
+        String [] sqlSelect ={"recipe_id","recipe_name","recipe_category","recipe_time","recipe_ingredients","recipe_steps","recipe_picture"};
+        String tableName = "recipes";
+
+        qb.setTables(tableName);
+        Cursor cursor = qb.query(db,sqlSelect,null,null,null,null,null);
+        List<Recipe> result = new ArrayList<>();
+        if (cursor.moveToFirst())
+        {
+            do{
+                Recipe recipe = new Recipe();
+                recipe.setId(cursor.getInt(cursor.getColumnIndex("recipe_id")));
+                recipe.setName(cursor.getString(cursor.getColumnIndex("recipe_name")));
+                recipe.setCategory(cursor.getString(cursor.getColumnIndex("recipe_category")));
+                recipe.setTime(cursor.getString(cursor.getColumnIndex("recipe_time")));
+                recipe.setIngredients(cursor.getString(cursor.getColumnIndex("recipe_ingredients")));
+                recipe.setSteps(cursor.getString(cursor.getColumnIndex("recipe_steps")));
+             //   recipe.setPicture(cursor.getBlob(cursor.getColumnIndex("recipe_picture")));
+
+                result.add(recipe);
+            }while (cursor.moveToNext());
+        }
+        return result;
+    }
+    */
+
+
+    /*
+    public Cursor viewData(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "Select * from "+TABLE_RECIPE;
+        Cursor cursor = db.rawQuery(query, null);
+        return cursor;
+    }
+
+    public Cursor searchRecipe(String text)
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "Select * from "+TABLE_RECIPE+" WHERE "+RECIPE_NAME+" Like '%"+text+"%'";
+        Cursor cursor = db.rawQuery(query, null);
+
+        return cursor;
+    }
+    */
 
 
 

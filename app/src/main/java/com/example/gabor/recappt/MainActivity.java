@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.os.Vibrator;
 
 public class MainActivity extends AppCompatActivity {
     EditText editTextUsername;
@@ -24,6 +25,10 @@ public class MainActivity extends AppCompatActivity {
     DatabaseHelper db;
     Animation sapkaAnim;
     ImageView sapkaImageView;
+    ImageView easterEggImageView;
+    int easterEgg = 0;
+    Vibrator vibrate;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +36,12 @@ public class MainActivity extends AppCompatActivity {
         //Ez teszi teljes képernyőssé az alkalmazást, viszont ha fennt picit húzunk a felső sávon, akkor megjeleníti egy pillanatra
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
         WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+
+
+// Vibrate for 400 milliseconds
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -47,6 +58,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        easterEggImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                easterEgg++;
+                if(easterEgg == 13) {
+                    Toast.makeText(MainActivity.this,
+                            "Készítette : Gubán Gábor :) ",
+                            Toast.LENGTH_LONG).show();
+                    easterEgg = 0;
+                }
+            }
+        });
+
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,9 +78,11 @@ public class MainActivity extends AppCompatActivity {
                 String password =  editTextPassword.getText().toString().trim();
 
                 if(editTextUsername.getText().toString().equals("")){
+                    vibrate.vibrate(300);
                     editTextUsername.setError("Username can't be empty!");
                 }
                 if(editTextPassword.getText().toString().equals("")) {
+                    vibrate.vibrate(300);
                     editTextPassword.setError("Password can't be empty!");
                 }
 
@@ -79,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
 
                     else if (res == false)
                     {
+                        vibrate.vibrate(300);
                         Toast.makeText(MainActivity.this,"Invalid username or password!",Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -94,5 +121,8 @@ public class MainActivity extends AppCompatActivity {
         textViewRegister = (TextView) findViewById(R.id.textView_register);
         sapkaAnim = AnimationUtils.loadAnimation(MainActivity.this,R.anim.bouncing);
         sapkaImageView =(ImageView)findViewById(R.id.imageView_logosapka);
+        easterEggImageView =(ImageView)findViewById(R.id.imageView_logo);
+        vibrate = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+
     }
 }

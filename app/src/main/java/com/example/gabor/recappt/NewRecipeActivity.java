@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.Image;
 import android.net.Uri;
+import android.os.Vibrator;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -26,6 +27,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.os.Vibrator;
 
 import com.airbnb.lottie.LottieAnimationView;
 
@@ -50,6 +52,7 @@ public class NewRecipeActivity extends AppCompatActivity {
     DatabaseHelper db;
     Bitmap recipePicture;
     Bitmap defaultPicture;
+    Vibrator vibrate;
   //  public static final int PICK_IMAGE = 0;
   //  public static final int IMAGE_CAPTURE = 1;
 
@@ -115,6 +118,7 @@ public class NewRecipeActivity extends AppCompatActivity {
         spinnerCategory.setAdapter(adapter);
 
         db = new DatabaseHelper(this);
+        vibrate = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
     }
 
     @Override
@@ -168,6 +172,7 @@ public class NewRecipeActivity extends AppCompatActivity {
 
                     if (recipeName.matches("") || recipeCategory.matches("") || recipeTime.matches("") || recipeIngredients.matches("") || recipeSteps.matches("")) {
                         Toast.makeText(NewRecipeActivity.this, "Field can not be empty!", Toast.LENGTH_SHORT).show();
+                        vibrate.vibrate(300);
                     } else
                         {
                         long val = db.addRecipe(recipeName, recipeCategory, recipeTime, recipeIngredients, recipeSteps, recipeUser, getBytes(recipePicture));
@@ -183,6 +188,7 @@ public class NewRecipeActivity extends AppCompatActivity {
 
                             overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
                         } else {
+                            vibrate.vibrate(300);
                             Toast.makeText(NewRecipeActivity.this, "Something went wrong!", Toast.LENGTH_SHORT).show();
                         }
                     }

@@ -116,9 +116,10 @@ public class RecipeItemActivity extends AppCompatActivity {
        // recipePicture = getIntent().getExtras().getParcelable("recipePicture");
     }
 
+    //Ez kellet a Pipához
     public boolean onCreateOptionsMenu(Menu menu) {
 
-        getMenuInflater().inflate(R.menu.recipe_item_menu, menu);   //Ez kellet a Pipához
+        getMenuInflater().inflate(R.menu.recipe_item_menu, menu);
         return true;
     }
 
@@ -154,9 +155,9 @@ public class RecipeItemActivity extends AppCompatActivity {
                 builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface dialog, int which) {
-                        // Do nothing but close the dialog
 
-                        db.delete(id);
+
+                        db.deleteRecipe(id);
 
                         Toast.makeText(RecipeItemActivity.this, recipeName+" is deleted !", Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
@@ -178,7 +179,7 @@ public class RecipeItemActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
-                        // Do nothing
+
                         dialog.dismiss();
 
                     }

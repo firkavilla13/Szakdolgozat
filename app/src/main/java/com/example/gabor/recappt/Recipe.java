@@ -11,16 +11,6 @@ public class Recipe {
     public int id;
     public String name,category,time,ingredients,steps;
 
-    public byte[] getPicture() {
-        return picture;
-    }
-
-    public void setPicture(byte[] picture) {
-        this.picture = picture;
-    }
-
-    public byte[] picture;
-
 
     public int getId() {
         return id;

@@ -9,7 +9,7 @@
     <group android:checkableBehavior="single">
 
         <item
-            android:id="@+id/nav_fomenu"
+            android:id="@+id/nav_allrecipes"
             android:icon="@mipmap/all"
             android:title="All Recipes"/>
         <item

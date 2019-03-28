@@ -1,7 +1,9 @@
 package com.example.gabor.recappt;
 
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,6 +15,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.os.Vibrator;
 
 public class RegisterActivity extends AppCompatActivity {
     EditText textUsername;
@@ -25,6 +28,7 @@ public class RegisterActivity extends AppCompatActivity {
     Animation ufoAnim;
     ImageView ufoImageView;
     DatabaseHelper db;
+    Vibrator vibrate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,21 +60,27 @@ public class RegisterActivity extends AppCompatActivity {
                 String email = textEmail.getText().toString().trim();
 
                 if(user.equals("")){
+                    vibrate.vibrate(300);
                     textUsername.setError("Username is missing!");
                 }
                 if(password.equals("")){
+                    vibrate.vibrate(300);
                     textPassword.setError("Password is missing!");
                 }
                 if(confirm_password.equals("")){
+                    vibrate.vibrate(300);
                     textConfirmPassword.setError("Confirm Password is missing!");
                 }
                 if(!confirm_password.equals(password)){
+                    vibrate.vibrate(300);
                     textConfirmPassword.setError("Passwords must be the same !");
                 }
                 if(fullname.equals("")){
+                    vibrate.vibrate(300);
                     textFullName.setError("Name is missing!");
                 }
                 if(email.equals("")){
+                    vibrate.vibrate(300);
                     textEmail.setError("E-mail is missing!");
                 }
 
@@ -90,10 +100,12 @@ public class RegisterActivity extends AppCompatActivity {
                             overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
                         }
                         else {
+                            vibrate.vibrate(300);
                             Toast.makeText(RegisterActivity.this,"Username or Email alredy in use!",Toast.LENGTH_SHORT).show();
                         }
                     }
-                else { Toast.makeText(RegisterActivity.this, "Email alredy in use!", Toast.LENGTH_SHORT).show();}
+                else {vibrate.vibrate(300);
+                    Toast.makeText(RegisterActivity.this, "Email alredy in use!", Toast.LENGTH_SHORT).show();}
             }
         });
     }
@@ -110,5 +122,6 @@ public class RegisterActivity extends AppCompatActivity {
         textViewLogin = (TextView) findViewById(R.id.textView_login);
         ufoAnim = AnimationUtils.loadAnimation(RegisterActivity.this,R.anim.ufo_anim);
         ufoImageView =(ImageView)findViewById(R.id.imageView_ufo);
+        vibrate = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
     }
 }
