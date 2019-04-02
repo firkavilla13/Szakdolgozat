@@ -38,8 +38,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        sqLiteDatabase.execSQL("create table "+TABLE_USER+" (ID INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT UNIQUE, password TEXT, fullname TEXT, email TEXT UNIQUE)");
-        sqLiteDatabase.execSQL("create table "+TABLE_RECIPE+" (recipe_id INTEGER PRIMARY KEY AUTOINCREMENT, recipe_name TEXT  , recipe_category TEXT, recipe_time TEXT, recipe_ingredients TEXT,recipe_steps TEXT, recipe_user TEXT, recipe_picture BLOB)");
+        sqLiteDatabase.execSQL("create table "+TABLE_USER+" (" +
+                "ID INTEGER PRIMARY KEY AUTOINCREMENT," +
+                " username TEXT UNIQUE," +
+                " password TEXT," +
+                " fullname TEXT," +
+                " email TEXT UNIQUE)");
+        sqLiteDatabase.execSQL("create table "+TABLE_RECIPE+" (" +
+                "recipe_id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                " recipe_name TEXT  ," +
+                " recipe_category TEXT," +
+                " recipe_time TEXT," +
+                " recipe_ingredients TEXT," +
+                "recipe_steps TEXT," +
+                " recipe_user TEXT," +
+                " recipe_picture BLOB)");
     }
     public String getUsername(){
         return USER_USERNAME;
@@ -69,7 +82,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     // Recept felvétele
-    public long addRecipe(String recipeName, String recipeCategory, String recipeTime, String recipeIngredients, String recipeSteps, String recipeUser, byte [] recipePicture){
+    public long addRecipe(String recipeName,
+                          String recipeCategory,
+                          String recipeTime,
+                          String recipeIngredients,
+                          String recipeSteps,
+                          String recipeUser,
+                          byte [] recipePicture){
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
@@ -87,8 +106,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // Felhasználó felvétele az adatbázisba
     public long addUser(String user, String password, String fullname, String email){
         SQLiteDatabase db = this.getWritableDatabase();
-
-
         ContentValues contentValues = new ContentValues();
         contentValues.put("username", user);
         contentValues.put("password", password);
@@ -100,15 +117,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
     // Felasználó ellenőrzése, hogy létezik-e ?
     public boolean checkUser(String username, String password){
-        String [] columns = {USER_ID};
+        String [] columns = {"username"};
         SQLiteDatabase db = getReadableDatabase();
-        String selection = USER_USERNAME + "=?" + " and " + USER_PASSWORD + "=?";
+        String selection = "username" + "=?" + " and  password =?";
         String[]selectionArgs = { username, password};
-        Cursor cursor = db.query(TABLE_USER,columns,selection,selectionArgs,null,null,null);
+        Cursor cursor = db.query("registeruser",columns,selection,selectionArgs,null,null,null);
         int count = cursor.getCount();
         cursor.close();
         db.close();
-
         if(count>0)
             return true;
         else
@@ -142,11 +158,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = getReadableDatabase();
         SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
 
-        String [] sqlSelect ={"recipe_id","recipe_name","recipe_category","recipe_time","recipe_ingredients","recipe_steps","recipe_user","recipe_picture"};
+        String [] sqlSelect ={"recipe_id"
+                ,"recipe_name",
+                "recipe_category",
+                "recipe_time",
+                "recipe_ingredients",
+                "recipe_steps",
+                "recipe_user"
+                ,"recipe_picture"};
         String tableName = "recipes";
-
         qb.setTables(tableName);
-        Cursor cursor = qb.query(db,sqlSelect,"recipe_category LIKE ? AND recipe_user = ?",new String[]{"%"+recipeCategory+"%",user},null,null,null,null);
+
+        Cursor cursor = qb.query(db,sqlSelect,
+                "recipe_category LIKE ? AND recipe_user = ?",new String[]{"%"+recipeCategory+"%",user},
+                null,
+                null,
+                null,
+                null);
         List<Recipe> result = new ArrayList<>();
         if (cursor.moveToFirst())
         {
